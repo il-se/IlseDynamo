@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DrillingProfiles>
+  <CoordinateReferenceSystem epsg="25833" name="UTM_33N" />
+  <Drillings>
+    <Drilling id="{A8057C65-F0F5-4B61-B35F-89B5C252CE45}" name="BS 1/13" date="19.08.2013" document="Daten_DB:LS 1 Haupttrasse.bop" depth="5.000" >
+      <Position easting="329.02" northing="929.62" height="12.700" />
+      <SoilLayers>
+        <SoilLayer depth="0.400" mainTypes="{DA8EB765-BF01-461B-8193-E5B5A56125A5};{BD0E30E6-E182-40FB-B4FA-9DB05E856E71};{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{12797DC7-5932-4E7A-951A-2D5D84ACBA31};{E9330060-6033-4D44-A1BC-84049FD32B47}" significantLayers="" info="Auffüllung, Mutterboden, Feinsand, mittelsandig, humos, Pflanzenreste" />
+        <SoilLayer depth="1.000" mainTypes="{DA8EB765-BF01-461B-8193-E5B5A56125A5};{171AF02D-0259-47FB-8427-3E8E4907880D}" additionalTypes="{F355389E-4047-4E36-B4C5-AD1F2EFC591D};{CFC55D09-4B02-414D-AC96-CFF8FB1C52FC};{E9330060-6033-4D44-A1BC-84049FD32B47};{58D3FA16-C7B9-4FAF-8F6C-A4EDE5835ABC}" significantLayers="" info="Auffüllung, Mittelsand, feinsandig, schwach schluffig, schwach humos, schwach kiesig" />
+        <SoilLayer depth="2.100" mainTypes="{B759A2D2-04F5-46EF-A516-0B90DEB803E6}" additionalTypes="" significantLayers="" info="Torf, weich" />
+        <SoilLayer depth="4.200" mainTypes="{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{12797DC7-5932-4E7A-951A-2D5D84ACBA31}" significantLayers="" info="Feinsand, schwach mittelsandig, vereinzelt Pflanzenreste" />
+        <SoilLayer depth="5.000" mainTypes="{E6344797-B047-47A7-8733-F89863FEE791};{6331C2FA-0AB9-47D5-8F71-8863743DA8BF}" additionalTypes="{15757AD8-25CB-4969-8A93-9C76364D191F};{C4647677-A5B6-47A6-BEA0-6DACDC1147B1};{58D3FA16-C7B9-4FAF-8F6C-A4EDE5835ABC}" significantLayers="" info="Geschiebemergel, Schluff, stark sandig, schwach tonig, schwach kiesig, steif" />
+      </SoilLayers>
+      <SoilConsistenceLayers>
+        <SoilConsistenceLayer top="1.000" bottom="2.100" consistence="{F0CD8FBC-0965-46FB-9C16-D5631A20F943}" />
+        <SoilConsistenceLayer top="4.200" bottom="5.000" consistence="{BF832663-71A8-4B3E-837E-DD04DBB91448}" />
+      </SoilConsistenceLayers>
+      <GroundwaterLevels>
+        <GroundwaterLevel type="{BD9F629C-606B-4DA2-BEC5-BDC5284C64DC}" name="Bohrende" depth="1.200" />
+        <GroundwaterLevel type="{D9FE1D20-72D3-431E-B3ED-D5C672185FC2}" name="angebohrt" depth="2.200" />
+      </GroundwaterLevels>
+    </Drilling>
+    <Drilling id="{DCBEE9B4-3C9F-40A6-8413-88000DABBEFA}" name="BS 2/13" date="19.08.2013" document="Daten_DB:LS 1 Haupttrasse.bop" depth="5.000" >
+      <Position easting="446.45" northing="904.72" height="15.960" />
+      <SoilLayers>
+        <SoilLayer depth="0.500" mainTypes="{DA8EB765-BF01-461B-8193-E5B5A56125A5};{BD0E30E6-E182-40FB-B4FA-9DB05E856E71};{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{12797DC7-5932-4E7A-951A-2D5D84ACBA31}" significantLayers="" info="Auffüllung, Mutterboden, Feinsand, mittelsandig" />
+        <SoilLayer depth="1.600" mainTypes="{DA8EB765-BF01-461B-8193-E5B5A56125A5};{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{12797DC7-5932-4E7A-951A-2D5D84ACBA31}" significantLayers="" info="Auffüllung, Feinsand, schwach mittelsandig, vereinzelt kleine Schluffstreifen" />
+        <SoilLayer depth="5.000" mainTypes="{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{12797DC7-5932-4E7A-951A-2D5D84ACBA31}" significantLayers="" info="Feinsand, stark mittelsandig" />
+      </SoilLayers>
+      <GroundwaterLevels>
+        <GroundwaterLevel type="{BD9F629C-606B-4DA2-BEC5-BDC5284C64DC}" name="Bohrende" depth="3.650" />
+        <GroundwaterLevel type="{D9FE1D20-72D3-431E-B3ED-D5C672185FC2}" name="angebohrt" depth="3.300" />
+      </GroundwaterLevels>
+    </Drilling>
+    <Drilling id="{5A31C0D2-00B3-486E-B2DE-79C8C54FC3AA}" name="BS 3/13" date="19.08.2013" document="Daten_DB:LS 1 Haupttrasse.bop" depth="9.000" >
+      <Position easting="513.28" northing="925.58" height="19.250" />
+      <SoilLayers>
+        <SoilLayer depth="0.300" mainTypes="{BD0E30E6-E182-40FB-B4FA-9DB05E856E71};{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{12797DC7-5932-4E7A-951A-2D5D84ACBA31}" significantLayers="" info="Mutterboden, Feinsand, mittelsandig, Pflanzen- und Wurzelreste" />
+        <SoilLayer depth="0.800" mainTypes="{171AF02D-0259-47FB-8427-3E8E4907880D}" additionalTypes="{F355389E-4047-4E36-B4C5-AD1F2EFC591D};{354AE0E1-7EDB-4044-AF6F-B89F1FEAFE59}" significantLayers="" info="Mittelsand, schwach feinsandig, schwach feinkiesig" />
+        <SoilLayer depth="2.000" mainTypes="{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{12797DC7-5932-4E7A-951A-2D5D84ACBA31}" significantLayers="" info="Feinsand, schwach mittelsandig" />
+        <SoilLayer depth="2.500" mainTypes="{E6344797-B047-47A7-8733-F89863FEE791};{6331C2FA-0AB9-47D5-8F71-8863743DA8BF}" additionalTypes="{15757AD8-25CB-4969-8A93-9C76364D191F};{C4647677-A5B6-47A6-BEA0-6DACDC1147B1};{58D3FA16-C7B9-4FAF-8F6C-A4EDE5835ABC}" significantLayers="" info="Geschiebemergel, Schluff, stark sandig, schwach tonig, schwach kiesig, weich - steif" />
+        <SoilLayer depth="9.000" mainTypes="{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{12797DC7-5932-4E7A-951A-2D5D84ACBA31};{C9EDADDB-E211-4A5A-A3D6-8587F4381776};{CFC55D09-4B02-414D-AC96-CFF8FB1C52FC}" significantLayers="" info="Feinsand, mittelsandig, schwach grobsandig, schwach schluffig" />
+      </SoilLayers>
+      <SoilConsistenceLayers>
+        <SoilConsistenceLayer top="2.000" bottom="2.500" consistence="{DF7C137B-79C7-4745-8650-6462A1DEDDEF}" />
+      </SoilConsistenceLayers>
+      <GroundwaterLevels>
+        <GroundwaterLevel type="{BD9F629C-606B-4DA2-BEC5-BDC5284C64DC}" name="Bohrende" depth="6.730" />
+        <GroundwaterLevel type="{D9FE1D20-72D3-431E-B3ED-D5C672185FC2}" name="angebohrt" depth="6.500" />
+      </GroundwaterLevels>
+    </Drilling>
+    <Drilling id="{2DB9BDFA-6498-4D8C-8FDC-DACF9571C027}" name="BS 4/13" date="19.08.2013" document="Daten_DB:LS 1 Haupttrasse.bop" depth="9.000" >
+      <Position easting="592.70" northing="915.78" height="21.530" />
+      <SoilLayers>
+        <SoilLayer depth="0.300" mainTypes="{BD0E30E6-E182-40FB-B4FA-9DB05E856E71};{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{12797DC7-5932-4E7A-951A-2D5D84ACBA31};{E9330060-6033-4D44-A1BC-84049FD32B47};{58D3FA16-C7B9-4FAF-8F6C-A4EDE5835ABC}" significantLayers="" info="Mutterboden, Feinsand, mittelsandig, stark humos, schwach kiesig" />
+        <SoilLayer depth="2.800" mainTypes="{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{CFC55D09-4B02-414D-AC96-CFF8FB1C52FC}" significantLayers="" info="Feinsand, schwach schluffig" />
+        <SoilLayer depth="4.200" mainTypes="{171AF02D-0259-47FB-8427-3E8E4907880D}" additionalTypes="{F355389E-4047-4E36-B4C5-AD1F2EFC591D};{C9EDADDB-E211-4A5A-A3D6-8587F4381776}" significantLayers="" info="Mittelsand, feinsandig, schwach grobsandig" />
+        <SoilLayer depth="5.200" mainTypes="{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{12797DC7-5932-4E7A-951A-2D5D84ACBA31}" significantLayers="" info="Feinsand, schwach mittelsandig" />
+        <SoilLayer depth="5.600" mainTypes="{171AF02D-0259-47FB-8427-3E8E4907880D}" additionalTypes="{C9EDADDB-E211-4A5A-A3D6-8587F4381776};{F355389E-4047-4E36-B4C5-AD1F2EFC591D}" significantLayers="" info="Mittelsand, grobsandig, schwach feinsandig" />
+        <SoilLayer depth="6.300" mainTypes="{2E1A9D8F-960D-40F9-9ED9-9F2BF3190DE8};{6331C2FA-0AB9-47D5-8F71-8863743DA8BF}" additionalTypes="{15757AD8-25CB-4969-8A93-9C76364D191F};{C4647677-A5B6-47A6-BEA0-6DACDC1147B1};{58D3FA16-C7B9-4FAF-8F6C-A4EDE5835ABC}" significantLayers="" info="Geschiebelehm, Schluff, stark sandig, schwach tonig, schwach kiesig, steif" />
+        <SoilLayer depth="6.800" mainTypes="{E6344797-B047-47A7-8733-F89863FEE791};{6331C2FA-0AB9-47D5-8F71-8863743DA8BF}" additionalTypes="{15757AD8-25CB-4969-8A93-9C76364D191F};{C4647677-A5B6-47A6-BEA0-6DACDC1147B1};{58D3FA16-C7B9-4FAF-8F6C-A4EDE5835ABC}" significantLayers="" info="Geschiebemergel, Schluff, stark sandig, schwach tonig, schwach kiesig, steif" />
+        <SoilLayer depth="9.000" mainTypes="{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{12797DC7-5932-4E7A-951A-2D5D84ACBA31};{CFC55D09-4B02-414D-AC96-CFF8FB1C52FC}" significantLayers="" info="Feinsand, schwach mittelsandig, schwach schluffig" />
+      </SoilLayers>
+      <SoilConsistenceLayers>
+        <SoilConsistenceLayer top="5.600" bottom="6.300" consistence="{BF832663-71A8-4B3E-837E-DD04DBB91448}" />
+        <SoilConsistenceLayer top="6.300" bottom="6.800" consistence="{BF832663-71A8-4B3E-837E-DD04DBB91448}" />
+      </SoilConsistenceLayers>
+      <GroundwaterLevels>
+        <GroundwaterLevel type="{BD9F629C-606B-4DA2-BEC5-BDC5284C64DC}" name="Bohrende" depth="8.200" />
+        <GroundwaterLevel type="{D9FE1D20-72D3-431E-B3ED-D5C672185FC2}" name="angebohrt" depth="8.300" />
+      </GroundwaterLevels>
+    </Drilling>
+    <Drilling id="{1CABD31D-4500-493A-BC48-B95E12275F4A}" name="BS 5/13" date="19.08.2013" document="Daten_DB:LS 1 Haupttrasse.bop" depth="8.000" >
+      <Position easting="662.41" northing="954.91" height="21.740" />
+      <SoilLayers>
+        <SoilLayer depth="0.400" mainTypes="{BD0E30E6-E182-40FB-B4FA-9DB05E856E71};{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{12797DC7-5932-4E7A-951A-2D5D84ACBA31}" significantLayers="" info="Mutterboden, Feinsand, schwach mittelsandig, Pflanzen- und Wurzelreste" />
+        <SoilLayer depth="1.800" mainTypes="{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="" significantLayers="" info="Feinsand" />
+        <SoilLayer depth="5.500" mainTypes="{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" additionalTypes="{12797DC7-5932-4E7A-951A-2D5D84ACBA31}" significantLayers="" info="Feinsand, schwach mittelsandig" />
+        <SoilLayer depth="8.000" mainTypes="{171AF02D-0259-47FB-8427-3E8E4907880D}" additionalTypes="{F355389E-4047-4E36-B4C5-AD1F2EFC591D}" significantLayers="" info="Mittelsand, stark feinsandig" />
+      </SoilLayers>
+    </Drilling>
+  </Drillings>
+  <SignificantLayerTypeSets>
+    <SignificantLayerTypeSet id="{90FCB225-2574-4C12-A929-00B227419EB7}" name="Erdarbeiten" >
+      <SignificantLayerType id="{680E61AD-C99B-4306-BD86-4BDA466995C6}" name="Erd 1" shortName="E" order="1" />
+      <SignificantLayerType id="{404AD9C6-49F8-40BE-A03D-0482CDBE84B6}" name="Erd 2" shortName="E" order="2" />
+      <SignificantLayerType id="{B98BCB74-861C-4B09-A6BC-4767B77385D7}" name="Erd 3" shortName="E" order="3" />
+      <SignificantLayerType id="{D258F24A-BCC5-4688-9B62-002664C722C8}" name="Erd 4" shortName="E" order="4" />
+      <SignificantLayerType id="{A992DF69-1DD0-463C-9314-9B68029C0F18}" name="Erd 5" shortName="E" order="5" />
+      <SignificantLayerType id="{24DA71EE-8AB4-40D7-A416-D5B1C67D0F69}" name="Erd 6" shortName="E" order="6" />
+      <SignificantLayerType id="{5F5FC600-AC41-4B65-A77B-F87FEC3F4308}" name="Erd 7" shortName="E" order="7" />
+    </SignificantLayerTypeSet>
+  </SignificantLayerTypeSets>
+  <SoilConsistenceTypes>
+    <SoilConsistenceType id="{F0CD8FBC-0965-46FB-9C16-D5631A20F943}" name="weich" />
+    <SoilConsistenceType id="{DF7C137B-79C7-4745-8650-6462A1DEDDEF}" name="weich - steif" />
+    <SoilConsistenceType id="{BF832663-71A8-4B3E-837E-DD04DBB91448}" name="steif" />
+  </SoilConsistenceTypes>
+
+  <SoilMainTypes>
+    <SoilMainType id="{C8D2BC29-DF4D-41A6-9E5C-7244919172D9}" shortname="fS" name="Feinsand" representation="{1B278560-12D5-4F2A-BF9F-443B0D7789E9}" />
+    <SoilMainType id="{171AF02D-0259-47FB-8427-3E8E4907880D}" shortname="mS" name="Mittelsand" representation="{3C88BFA3-A3E6-4E30-BF06-5D38D03C85EB}" />
+    <SoilMainType id="{6331C2FA-0AB9-47D5-8F71-8863743DA8BF}" shortname="U" name="Schluff" representation="{DDDE75EB-5851-46ED-A8AE-428C8F45C238}" />
+    <SoilMainType id="{B759A2D2-04F5-46EF-A516-0B90DEB803E6}" shortname="H" name="Torf" representation="{47975FAD-CD6C-4F18-8236-38C31BE45D66}" />
+    <SoilMainType id="{BD0E30E6-E182-40FB-B4FA-9DB05E856E71}" shortname="Mu" name="Mutterboden" representation="{C54529EC-86D5-4D20-84EF-F2DBD4CDCF19}" />
+    <SoilMainType id="{DA8EB765-BF01-461B-8193-E5B5A56125A5}" shortname="A" name="Auffüllung" representation="{EC2948A3-A27D-457C-969D-5EFA7F37D0F8}" />
+    <SoilMainType id="{2E1A9D8F-960D-40F9-9ED9-9F2BF3190DE8}" shortname="Gl" name="Geschiebelehm" representation="{0F324752-B7D3-4303-92F7-5848D4D894AA}" />
+    <SoilMainType id="{E6344797-B047-47A7-8733-F89863FEE791}" shortname="Gmg" name="Geschiebemergel" representation="{5205EEB6-375D-4AFD-9A01-58147D47719D}" />
+  </SoilMainTypes>
+  <SoilAdditionalTypes>
+    <SoilAdditionalType id="{354AE0E1-7EDB-4044-AF6F-B89F1FEAFE59}" shortname="fg" name="feinkiesig" />
+    <SoilAdditionalType id="{F355389E-4047-4E36-B4C5-AD1F2EFC591D}" shortname="fs" name="feinsandig" />
+    <SoilAdditionalType id="{58D3FA16-C7B9-4FAF-8F6C-A4EDE5835ABC}" shortname="g" name="kiesig" />
+    <SoilAdditionalType id="{C9EDADDB-E211-4A5A-A3D6-8587F4381776}" shortname="gs" name="grobsandig" />
+    <SoilAdditionalType id="{E9330060-6033-4D44-A1BC-84049FD32B47}" shortname="h" name="humos" />
+    <SoilAdditionalType id="{12797DC7-5932-4E7A-951A-2D5D84ACBA31}" shortname="ms" name="mittelsandig" />
+    <SoilAdditionalType id="{15757AD8-25CB-4969-8A93-9C76364D191F}" shortname="s" name="sandig" />
+    <SoilAdditionalType id="{C4647677-A5B6-47A6-BEA0-6DACDC1147B1}" shortname="t" name="tonig" />
+    <SoilAdditionalType id="{CFC55D09-4B02-414D-AC96-CFF8FB1C52FC}" shortname="u" name="schluffig" />
+  </SoilAdditionalTypes>
+  <Representations>
+    <Representation id="{1B278560-12D5-4F2A-BF9F-443B0D7789E9}" name="Feinsand" color="{2AE56A87-2416-4A8D-A78A-A64EFF3C04F2}" />
+    <Representation id="{3C88BFA3-A3E6-4E30-BF06-5D38D03C85EB}" name="Mittelsand" color="{A624AFCB-5ECD-493F-8FCB-338B87BD6DD0}" />
+    <Representation id="{DDDE75EB-5851-46ED-A8AE-428C8F45C238}" name="Schluff" color="{6A760C6E-AAA1-4CAD-9FED-8167D404269B}" />
+    <Representation id="{47975FAD-CD6C-4F18-8236-38C31BE45D66}" name="Torf" color="{D67DAA4B-0212-4D2B-964B-E5CA0EE6070A}" />
+    <Representation id="{C54529EC-86D5-4D20-84EF-F2DBD4CDCF19}" name="Mutterboden" color="{06E2765D-9E0C-4629-BFBF-151536BB516C}" />
+    <Representation id="{EC2948A3-A27D-457C-969D-5EFA7F37D0F8}" name="Auffüllung" color="{029FF6C4-D2D5-44EB-9EE0-92D5FFE2501E}" />
+    <Representation id="{0F324752-B7D3-4303-92F7-5848D4D894AA}" name="Geschiebelehm" color="{27867C5F-2EEC-4BDB-8059-F99A872B10E2}" />
+    <Representation id="{5205EEB6-375D-4AFD-9A01-58147D47719D}" name="Geschiebemergel" color="{2886EC95-4DA3-489C-9A8B-9E160A0F45D4}" />
+  </Representations>
+  <GroundWaterLevelTypes>
+    <GroundWaterLevelType id="{BD9F629C-606B-4DA2-BEC5-BDC5284C64DC}" name="Bohrende" />
+    <GroundWaterLevelType id="{D9FE1D20-72D3-431E-B3ED-D5C672185FC2}" name="angebohrt" />
+  </GroundWaterLevelTypes>
+  <Colors>
+    <Color id="{6A760C6E-AAA1-4CAD-9FED-8167D404269B}" name="Schluff" r="173" g="176" b="53" />
+    <Color id="{2AE56A87-2416-4A8D-A78A-A64EFF3C04F2}" name="Feinsand" r="255" g="156" b="0" />
+    <Color id="{A624AFCB-5ECD-493F-8FCB-338B87BD6DD0}" name="Mittelsand" r="255" g="156" b="0" />
+    <Color id="{D67DAA4B-0212-4D2B-964B-E5CA0EE6070A}" name="Torf" r="121" g="95" b="62" />
+    <Color id="{06E2765D-9E0C-4629-BFBF-151536BB516C}" name="Mutterboden" r="226" g="187" b="29" />
+    <Color id="{029FF6C4-D2D5-44EB-9EE0-92D5FFE2501E}" name="Auffüllung" r="255" g="255" b="255" />
+    <Color id="{27867C5F-2EEC-4BDB-8059-F99A872B10E2}" name="Geschiebelehm" r="150" g="150" b="150" />
+    <Color id="{2886EC95-4DA3-489C-9A8B-9E160A0F45D4}" name="Geschiebemergel" r="91" g="106" b="244" />
+  </Colors>
+</DrillingProfiles>

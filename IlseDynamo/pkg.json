@@ -1,0 +1,20 @@
+{
+  "license": "Apache2.0",
+  "file_hash": null,
+  "name": "IL-SE-Dynamo",
+  "version": "0.1.0",
+  "description": "IL-SE Dynamo",
+  "group": "IL-SE",
+  "keywords": [ "Allplan", "GGU" ],
+  "dependencies": [],
+  "contents": "IL-SE workflows",
+  "engine_version": "1.0.0",
+  "engine": "dynamo",
+  "engine_metadata": "",
+  "site_url": "",
+  "repository_url": "https://www.github.com/il-se/IlseDynamo",
+  "contains_binaries": true,
+  "node_libraries": [
+    "IlseDynamo, Version=0.1.0, Culture=neutral, PublicKeyToken=null"    
+  ]
+}

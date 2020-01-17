@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IlseDynamo", "IlseDynamo\IlseDynamo.csproj", "{7BEEEA86-CD60-4A87-B21F-5613555DE8A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IlseDynamo.Tests", "IlseDynamo.Tests\IlseDynamo.Tests.csproj", "{74B7B905-BE8D-49A8-A917-FC3B579F0C15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BEEEA86-CD60-4A87-B21F-5613555DE8A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BEEEA86-CD60-4A87-B21F-5613555DE8A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BEEEA86-CD60-4A87-B21F-5613555DE8A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BEEEA86-CD60-4A87-B21F-5613555DE8A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74B7B905-BE8D-49A8-A917-FC3B579F0C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74B7B905-BE8D-49A8-A917-FC3B579F0C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74B7B905-BE8D-49A8-A917-FC3B579F0C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74B7B905-BE8D-49A8-A917-FC3B579F0C15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9975B6CE-5D8D-4626-A1F3-1EA6970812C4}
+	EndGlobalSection
+EndGlobal

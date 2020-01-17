@@ -1,0 +1,105 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net47</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LanguageTargets>$(MSBuildToolsPath)\Microsoft.CSharp.targets</LanguageTargets>
+    <Title>IlseAllplan</Title>
+    <Description></Description>
+    <OutputType>Library</OutputType>    
+
+    <Version>0.1.0.0</Version>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>
+    <AssemblyName>IlseDynamo</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />    
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="DynamoVisualProgramming.Core">
+      <Version>2.5.0.7186</Version>
+    </PackageReference>
+    <PackageReference Include="DynamoVisualProgramming.DynamoServices">
+      <Version>2.5.0.7186</Version>
+    </PackageReference>
+    <PackageReference Include="DynamoVisualProgramming.ZeroTouchLibrary">
+      <Version>2.5.0.7186</Version>
+    </PackageReference>
+    <PackageReference Include="System.Collections.Immutable" Version="1.7.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Update="pkg.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- After build -->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <PropertyGroup>
+      <DeployFolder Condition="'$(Configuration)' == 'Debug'">$(AppData)\Dynamo\Dynamo Core\2.5\packages\$(ProjectName)</DeployFolder>
+      <DeployFolder Condition="'$(Configuration)' == 'Release'">$(AppData)\Dynamo\Dynamo Revit\2.5\packages\$(ProjectName)</DeployFolder>
+    </PropertyGroup>
+    
+    <Message Importance="High" Text="Started building the Dynamo package" />
+
+    <ItemGroup>
+      <SourceDlls Include="$(TargetDir)Ilse*.dll" />
+      <SourcePdbs Include="$(TargetDir)*.pdb" />
+      <SourceXmls Include="$(TargetDir)*.xml" />
+      <SourcePkg Include="pkg.json" />
+      <!-- <SourceExtension Include="$(TargetDir)*ExtensionDefinition.xml" /> -->
+    </ItemGroup>
+    
+    <!-- Remove before copying -->
+    <RemoveDir Directories="$(DeployFolder)" />
+    
+    <!--Copying to Build Folder-->
+    <Copy SourceFiles="@(SourceDlls)" DestinationFolder="$(DeployFolder)\bin\" />
+    <Copy SourceFiles="@(SourcePdbs)" DestinationFolder="$(DeployFolder)\bin\" />
+    <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(DeployFolder)" />
+    <Copy SourceFiles="@(SourceXmls)" DestinationFolder="$(DeployFolder)\bin\" />
+    <!-- <Copy SourceFiles="@(SourceExtension)" DestinationFolder="$(DeployFolder)\extra" /> -->
+    <Message Importance="High" Text="Built to $(TargetDir)\$(ProjectName)" />
+    
+    <ItemGroup>
+      <SourcePackage Include="$(TargetDir)\$(ProjectName)\**\*" />
+    </ItemGroup>
+    
+    <Message Importance="High" Text="Deployed to $(DeployFolder)" />
+  </Target>
+  
+</Project>
