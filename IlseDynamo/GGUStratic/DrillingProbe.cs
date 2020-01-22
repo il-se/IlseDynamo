@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Autodesk.DesignScript.Geometry;
 
@@ -51,7 +49,7 @@ namespace GGUStratic
         /// <summary>
         /// The 3D position of probe.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The 3D position</returns>
         public Point GetPosition()
         {
             return Point.ByCoordinates(Probe.Position.Easting, Probe.Position.Northing, Probe.Position.Height);
@@ -60,7 +58,7 @@ namespace GGUStratic
         /// <summary>
         /// The name of probe.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The name of the probe</returns>
         public string GetName()
         {
             return Probe.Name;
@@ -69,7 +67,7 @@ namespace GGUStratic
         /// <summary>
         /// Gets the associated labels of each layer
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An info per layer</returns>
         public string[] GetLayerInfo()
         {
             return Probe?.SoilLayers.Select(l => l.Info).ToArray();
@@ -78,31 +76,55 @@ namespace GGUStratic
         /// <summary>
         /// Gets the associated end depth for each layer
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A depth per layer</returns>
         public double[] GetLayerDepth()
         {
             return Probe?.SoilLayers.Select(l => l.Depth).ToArray();
         }
 
         /// <summary>
-        /// Gets the associated short types for each layer
+        /// Gets the associated short type classifiers for each layer.
         /// </summary>
-        /// <returns></returns>
-        public string[][] GetLayerShortTypes()
+        /// <returns>List of type classifiers per layer</returns>
+        public string[][] GetLayerTypes()
         {
             return Probe?.SoilLayers.Select(l => l.SoilMainTypes.Select(t => t.ShortName).ToArray()).ToArray();
         }
 
         /// <summary>
+        /// Gets an string aggregation of type classifiers per layer.
+        /// </summary>
+        /// <param name="separator">The classifier separator (by default ',')</param>
+        /// <returns>Aggregated type infos per layer</returns>
+        public string[] GetLayerTypeInfo(string separator = ",")
+        {
+            return GetLayerTypes().Select(l => string.Join(separator, l)).ToArray();
+        }
+
+        /// <summary>
         /// Gets the associated layer type names for each layer
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A list of type names per layer</returns>
         public string[][] GetLayerTypeNames()
         {
             return Probe?.SoilLayers.Select(l => l.SoilMainTypes.Select(t => t.Name).ToArray()).ToArray();
         }
 
-        public object[] GetData()
+        /// <summary>
+        /// Gets an string aggregation of type names per layer.
+        /// </summary>
+        /// <param name="separator">The type name separator (by default ',')</param>
+        /// <returns>Aggregated type name infos per layer</returns>
+        public string[] GetLayerTypeNameInfo(string separator = ",")
+        {
+            return GetLayerTypeNames().Select(l => string.Join(separator, l)).ToArray();
+        }
+
+        /// <summary>
+        /// Gets a representative data matrix of the probe (name, position, representative layer data).
+        /// </summary>
+        /// <returns>Representative layer data per layer</returns>
+        public object[] GetTabularData()
         {
             return Data.SelectMany(data => data(Probe)).ToArray();
         }
