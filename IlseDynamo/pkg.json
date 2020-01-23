@@ -11,10 +11,10 @@
   "engine_version": "1.0.0",
   "engine": "dynamo",
   "engine_metadata": "",
-  "site_url": "",
+  "site_url": "https://www.github.com/il-se/IlseDynamo",
   "repository_url": "https://www.github.com/il-se/IlseDynamo",
   "contains_binaries": true,
   "node_libraries": [
-    "IlseDynamo, Version=0.1.0, Culture=neutral, PublicKeyToken=null"    
+    "IlseDynamo, Version=0.1.0, Culture=neutral, PublicKeyToken=null"
   ]
 }
