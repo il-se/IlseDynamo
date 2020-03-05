@@ -9,7 +9,7 @@ using System.Globalization;
 namespace GGUStratic
 {
     [TestClass]
-    public class XmlParserTests
+    public class GGUDrillingProbesTests
     {
         [DeploymentItem(@"Resources\GGUDrillingProfilesExample.xml")]
         [TestMethod]
