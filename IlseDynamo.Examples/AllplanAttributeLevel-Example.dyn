@@ -1,0 +1,1027 @@
+{
+  "Uuid": "4ca3d444-7201-4d3e-a092-153ab6cdaac5",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "AllplanAttributeLevel-Example",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Allplan.AttributeDefinition.ByFileName@string",
+      "Id": "de696f61142c431ba51b7e07c953c90c",
+      "Inputs": [
+        {
+          "Id": "a7913c03ba504406b3a46988cd818dde",
+          "Name": "fileName",
+          "Description": "The file name\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8ae64c8b79b749a6b72efde37b4d8632",
+          "Name": "AttributeDefinition",
+          "Description": "An attribute definition",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Reads a new attribute definition by file name.\n\nAttributeDefinition.ByFileName (fileName: string): AttributeDefinition"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "H:\\Workbench\\Dynamo\\Allplan\\AttributeDefinitionCollectionAllplan_de.xml",
+      "InputValue": "H:\\Workbench\\Dynamo\\Allplan\\AttributeDefinitionCollectionAllplan_de.xml",
+      "NodeType": "ExtensionNode",
+      "Id": "3a71f92adc6a40e5bc2a791736372267",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "0b34dfc0c46242a69b452292b77c9181",
+          "Name": "",
+          "Description": "Filename",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Ermöglicht die Auswahl einer Datei auf dem System, um ihren Dateinamen abzurufen."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "H:\\Workbench\\Dynamo\\Allplan\\AttributeDefinitionCollectionLocal_de.xml",
+      "InputValue": "H:\\Workbench\\Dynamo\\Allplan\\AttributeDefinitionCollectionLocal_de.xml",
+      "NodeType": "ExtensionNode",
+      "Id": "4eba654cfe6a43d88820b3c2154955b4",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1d32bc9831464f62ba5139fed0493f4f",
+          "Name": "",
+          "Description": "Filename",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Ermöglicht die Auswahl einer Datei auf dem System, um ihren Dateinamen abzurufen."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Allplan.AttributeDefinition.ByFileName@string",
+      "Id": "b5e6fb2af54c40a7ab96bbba329b58df",
+      "Inputs": [
+        {
+          "Id": "e94c65c31a1246c1ac48c7e4a1f87437",
+          "Name": "fileName",
+          "Description": "The file name\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "bfe6da6f72884100b85bf8eccffa753a",
+          "Name": "AttributeDefinition",
+          "Description": "An attribute definition",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Reads a new attribute definition by file name.\n\nAttributeDefinition.ByFileName (fileName: string): AttributeDefinition"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Allplan.AttributeDefinition.Merge@Allplan.AttributeDefinition,Allplan.AttributeDefinition,Allplan.MergeStrategy",
+      "Id": "759736f50e154adab806c2fa3b6233bc",
+      "Inputs": [
+        {
+          "Id": "9301cc32d5ac4cb78cfee82d2ae22bc7",
+          "Name": "left",
+          "Description": "The left hand\n\nAttributeDefinition",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6acbecd0340443199809cbe13f49e49a",
+          "Name": "right",
+          "Description": "The right hand\n\nAttributeDefinition",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6312ab412adf4addb8c9a67d325be7b2",
+          "Name": "mergeStrategy",
+          "Description": "The strategy\n\nMergeStrategy",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3bb800aa52594ed888d146244ecf6f4e",
+          "Name": "attributeDefintion",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "62ef7bc425564f0eb6569e7c5fcf6583",
+          "Name": "report",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Runs a merge on two given collections using a given strategy.\n\nAttributeDefinition.Merge (left: AttributeDefinition, right: AttributeDefinition, mergeStrategy: MergeStrategy): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Allplan.MergeStrategy.ThrowExceptionOnFirst",
+      "Id": "76b3ed288c4947fc96e202daec094c6d",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "55a80a7b42494df58804da91752e24e4",
+          "Name": "MergeStrategy",
+          "Description": "MergeStrategy",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Throw an exception if definitions don't match. The merge node will get a warning.\n\nMergeStrategy.ThrowExceptionOnFirst: MergeStrategy"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Workspace\\Git\\IlseDynamo\\IlseDynamo.Tests\\Resources\\AttributeFavourite.atfanfx",
+      "InputValue": "..\\IlseDynamo.Tests\\Resources\\AttributeFavourite.atfanfx",
+      "NodeType": "ExtensionNode",
+      "Id": "13deac819c42461092d24e49eee0c521",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "b4f0fb6ef43645f186e7f7a0910f96b1",
+          "Name": "",
+          "Description": "Filename",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Ermöglicht die Auswahl einer Datei auf dem System, um ihren Dateinamen abzurufen."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Allplan.AttributeFavourite.ByFileName@string",
+      "Id": "0650643a6cde4a4db2fed304cb447aa2",
+      "Inputs": [
+        {
+          "Id": "0371d30327424b40891cd5d4072670d7",
+          "Name": "fileName",
+          "Description": "The file name\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f41fdb837b8e41f2b41b6debdff4f8fe",
+          "Name": "AttributeFavourite",
+          "Description": "A favourite",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Imports an Allplan Favourite file.\n\nAttributeFavourite.ByFileName (fileName: string): AttributeFavourite"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Allplan.AttributeFavourite.OfLevel@Allplan.AttributeLevel,Allplan.AttributeDefinition",
+      "Id": "f893b6998be94dd9bea007af44341800",
+      "Inputs": [
+        {
+          "Id": "4bdf94232b81413a8d574547356dada9",
+          "Name": "attributeFavourite",
+          "Description": "Allplan.AttributeFavourite",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ad6d1e94c3e8432ba5d4082f0811746e",
+          "Name": "attributeLevel",
+          "Description": "AttributeLevel",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "abf032b87ea94826957fad97090d948a",
+          "Name": "attributeDefinition",
+          "Description": "AttributeDefinition",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "770692479d89460ebd7802e011be8566",
+          "Name": "AttributeFavourite",
+          "Description": "AttributeFavourite",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "AttributeFavourite.OfLevel (attributeLevel: AttributeLevel, attributeDefinition: AttributeDefinition): AttributeFavourite"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Allplan.AttributeMatrix.ByData@int[],string[]",
+      "Id": "4f5e62a1472c49739a2d0f3e648c775d",
+      "Inputs": [
+        {
+          "Id": "9385804379ec4cf2a3081acde552fca6",
+          "Name": "levels",
+          "Description": "int[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e3da21d0997d495688fa8a328e156d0b",
+          "Name": "attributeNames",
+          "Description": "string[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3e528c54ae734603a7884cd3bcc6bfb4",
+          "Name": "AttributeMatrix",
+          "Description": "AttributeMatrix",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "New LOI definitions by given data import.\n\nAttributeMatrix.ByData (levels: int[], attributeNames: string[]): AttributeMatrix"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "[1,2,3];",
+      "Id": "056fc71b1c5e4c0abec7d996ef1e2f88",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "13efe10f4c36411fa2dbcd1f09288396",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Ermöglicht die direkte Erstellung von DesignScript-Code."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "[\"Umbaukategorie\",\"Betonstahl\", \"Regelwerk\"];",
+      "Id": "a6db8fe28c4647009d98d2d21a2c6eea",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d810e2621a4f4779bd0345295f71821f",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Ermöglicht die direkte Erstellung von DesignScript-Code."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Allplan.AttributeMatrix.AllUpToLevel@int",
+      "Id": "0eb1fe948524446db2346d6c32d02064",
+      "Inputs": [
+        {
+          "Id": "1903137cd7cf46deba3071d108edbd64",
+          "Name": "attributeMatrix",
+          "Description": "Allplan.AttributeMatrix",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "026049357d2d4256aee1a11fc990948a",
+          "Name": "level",
+          "Description": "int",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "be1f61ca2f954e2cb0162daf0f3356d6",
+          "Name": "AttributeLevel",
+          "Description": "AttributeLevel",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "AttributeMatrix.AllUpToLevel (level: int): AttributeLevel"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "[1,2,3];",
+      "Id": "6564d96420414cfbb3c33e1460aa2a8b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "b7aa80b6df8d4d90b8a0789b066a6e98",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Ermöglicht die direkte Erstellung von DesignScript-Code."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Allplan.AttributeFavourite.ToData",
+      "Id": "9680f7dcb9a548759ef0dd87a844ae13",
+      "Inputs": [
+        {
+          "Id": "eb60e520c67e45118d4c9d38b6650264",
+          "Name": "attributeFavourite",
+          "Description": "Allplan.AttributeFavourite",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "66935ffb1d83476dab4f611983c9f6f1",
+          "Name": "ifnr",
+          "Description": "Data of favourite",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "41308b5f7e494e52bd66556e361e255e",
+          "Name": "value",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Dumps the data of favourite.\n\nAttributeFavourite.ToData ( ): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "4e9bc0299e3e47229b0e1274e4330335",
+      "Inputs": [
+        {
+          "Id": "a61f70ab31fe4757829e4e248b8e4920",
+          "Name": "",
+          "Description": "Auszuwertender Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "aade4e177a334bedb162e372a1bf7518",
+          "Name": "",
+          "Description": "Inhalt beobachten",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "9ce6b4207f804779b0e266bda3663ccb",
+      "Inputs": [
+        {
+          "Id": "0893887d5f21495c99a1aae18af0720e",
+          "Name": "",
+          "Description": "Auszuwertender Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7f701897453b4384b1c8c01876a41496",
+          "Name": "",
+          "Description": "Inhalt beobachten",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Allplan.AttributeFavourite.ToData@Allplan.AttributeDefinition",
+      "Id": "78cf96a848804457bb7a7f026c170836",
+      "Inputs": [
+        {
+          "Id": "88a87a4dc82549138e2631afd0c02e0c",
+          "Name": "attributeFavourite",
+          "Description": "Allplan.AttributeFavourite",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ca1e2d5ecf8c4ab7955c8bb272bd5c89",
+          "Name": "attributeDefinition",
+          "Description": "The definition to resolve IFNR against\n\nAttributeDefinition",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a0b285a7b095428393f5b10787650439",
+          "Name": "name",
+          "Description": "Data of favourite",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b7636d35b36c444986adf04cb4287ba9",
+          "Name": "value",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Dumps the data of favourite using the given defintion for resolving.\n\nAttributeFavourite.ToData (attributeDefinition: AttributeDefinition): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "2ad74574fae54f58acae7f1b0c281892",
+      "Inputs": [
+        {
+          "Id": "9c47ead1cc71433d9134af28ad096a7b",
+          "Name": "",
+          "Description": "Auszuwertender Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "486e2b4186e9421080495a0915218e3d",
+          "Name": "",
+          "Description": "Inhalt beobachten",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "0f2af184e74a4e5da5afcec4bfe6c214",
+      "Inputs": [
+        {
+          "Id": "e17a799ee14b4e3ca86d29ab16c175bf",
+          "Name": "",
+          "Description": "Auszuwertender Block",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "43e1325629244851a2e981266a28e01f",
+          "Name": "",
+          "Description": "Inhalt beobachten",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "8ae64c8b79b749a6b72efde37b4d8632",
+      "End": "9301cc32d5ac4cb78cfee82d2ae22bc7",
+      "Id": "41c1146343b646fa83a100f5e19ca625"
+    },
+    {
+      "Start": "0b34dfc0c46242a69b452292b77c9181",
+      "End": "a7913c03ba504406b3a46988cd818dde",
+      "Id": "30cc40760847454dbe486a058bf0ac2e"
+    },
+    {
+      "Start": "1d32bc9831464f62ba5139fed0493f4f",
+      "End": "e94c65c31a1246c1ac48c7e4a1f87437",
+      "Id": "468cf0a4c2974e488d5ef8d9d815a2d6"
+    },
+    {
+      "Start": "bfe6da6f72884100b85bf8eccffa753a",
+      "End": "6acbecd0340443199809cbe13f49e49a",
+      "Id": "29693a48e24a4cc19cb0b43946a07462"
+    },
+    {
+      "Start": "3bb800aa52594ed888d146244ecf6f4e",
+      "End": "abf032b87ea94826957fad97090d948a",
+      "Id": "4a540c3e7c194119b07224aba55468e7"
+    },
+    {
+      "Start": "3bb800aa52594ed888d146244ecf6f4e",
+      "End": "ca1e2d5ecf8c4ab7955c8bb272bd5c89",
+      "Id": "0dd7c92a31004e5aaa1da3556412e5e5"
+    },
+    {
+      "Start": "55a80a7b42494df58804da91752e24e4",
+      "End": "6312ab412adf4addb8c9a67d325be7b2",
+      "Id": "6468e80d642d4cb3957597f6f72271a1"
+    },
+    {
+      "Start": "b4f0fb6ef43645f186e7f7a0910f96b1",
+      "End": "0371d30327424b40891cd5d4072670d7",
+      "Id": "23806d6d1ac943a2a172555eb44591c7"
+    },
+    {
+      "Start": "f41fdb837b8e41f2b41b6debdff4f8fe",
+      "End": "4bdf94232b81413a8d574547356dada9",
+      "Id": "5f2cc636eef04eeb9d1aaf51aee6805c"
+    },
+    {
+      "Start": "770692479d89460ebd7802e011be8566",
+      "End": "eb60e520c67e45118d4c9d38b6650264",
+      "Id": "9774f67d4dee4af48ef0dddccc582b5e"
+    },
+    {
+      "Start": "770692479d89460ebd7802e011be8566",
+      "End": "88a87a4dc82549138e2631afd0c02e0c",
+      "Id": "53cae76edce246bb842fe022fa95bdb5"
+    },
+    {
+      "Start": "3e528c54ae734603a7884cd3bcc6bfb4",
+      "End": "1903137cd7cf46deba3071d108edbd64",
+      "Id": "597bbd99bc0d461780a01047a17d5efd"
+    },
+    {
+      "Start": "13efe10f4c36411fa2dbcd1f09288396",
+      "End": "9385804379ec4cf2a3081acde552fca6",
+      "Id": "7a08443f8e4147fcb8b266b72d2b5de7"
+    },
+    {
+      "Start": "d810e2621a4f4779bd0345295f71821f",
+      "End": "e3da21d0997d495688fa8a328e156d0b",
+      "Id": "9f0a99f3b7f34b20a4e42223d84a927b"
+    },
+    {
+      "Start": "be1f61ca2f954e2cb0162daf0f3356d6",
+      "End": "ad6d1e94c3e8432ba5d4082f0811746e",
+      "Id": "4e5fdb4d9f4f444ab98a37903d76cb37"
+    },
+    {
+      "Start": "b7aa80b6df8d4d90b8a0789b066a6e98",
+      "End": "026049357d2d4256aee1a11fc990948a",
+      "Id": "d0c1cd5455674bcaac48c4ecc0175e4d"
+    },
+    {
+      "Start": "66935ffb1d83476dab4f611983c9f6f1",
+      "End": "a61f70ab31fe4757829e4e248b8e4920",
+      "Id": "e102c592651e42a68935e399f16edfc5"
+    },
+    {
+      "Start": "41308b5f7e494e52bd66556e361e255e",
+      "End": "0893887d5f21495c99a1aae18af0720e",
+      "Id": "6ab9e2997cef409ea217d6d861522dab"
+    },
+    {
+      "Start": "a0b285a7b095428393f5b10787650439",
+      "End": "9c47ead1cc71433d9134af28ad096a7b",
+      "Id": "eb61eff6346e40c980a51856f33617bf"
+    },
+    {
+      "Start": "b7636d35b36c444986adf04cb4287ba9",
+      "End": "e17a799ee14b4e3ca86d29ab16c175bf",
+      "Id": "1981dc2cbbc64326a2433761519fe917"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "IL-SE-Dynamo",
+      "Version": "0.1.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "de696f61142c431ba51b7e07c953c90c",
+        "b5e6fb2af54c40a7ab96bbba329b58df",
+        "759736f50e154adab806c2fa3b6233bc",
+        "76b3ed288c4947fc96e202daec094c6d",
+        "0650643a6cde4a4db2fed304cb447aa2",
+        "f893b6998be94dd9bea007af44341800",
+        "4f5e62a1472c49739a2d0f3e648c775d",
+        "0eb1fe948524446db2346d6c32d02064",
+        "9680f7dcb9a548759ef0dd87a844ae13",
+        "78cf96a848804457bb7a7f026c170836"
+      ]
+    }
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.5.0.7186",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Hintergrundvorschau",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "AttributeDefinition.ByFileName",
+        "Id": "de696f61142c431ba51b7e07c953c90c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 356.32578651165977,
+        "Y": 153.96976574756775
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File Path",
+        "Id": "3a71f92adc6a40e5bc2a791736372267",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -207.44042057373474,
+        "Y": 151.37677000174895
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File Path",
+        "Id": "4eba654cfe6a43d88820b3c2154955b4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -207.69697139247603,
+        "Y": 262.47812361421848
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "AttributeDefinition.ByFileName",
+        "Id": "b5e6fb2af54c40a7ab96bbba329b58df",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 353.85246219672717,
+        "Y": 261.86427705456
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "AttributeDefinition.Merge",
+        "Id": "759736f50e154adab806c2fa3b6233bc",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 727.67824786272,
+        "Y": 223.12658508511856
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "MergeStrategy.ThrowExceptionOnFirst",
+        "Id": "76b3ed288c4947fc96e202daec094c6d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 353.35487288939987,
+        "Y": 371.91882783825213
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File Path",
+        "Id": "13deac819c42461092d24e49eee0c521",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -201.88134751078269,
+        "Y": 24.200560296463294
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "AttributeFavourite.ByFileName",
+        "Id": "0650643a6cde4a4db2fed304cb447aa2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 361.82969531215144,
+        "Y": 34.287999231558615
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "AttributeFavourite.OfLevel",
+        "Id": "f893b6998be94dd9bea007af44341800",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1261.6433594326102,
+        "Y": 425.44027281803307
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "AttributeMatrix.ByData",
+        "Id": "4f5e62a1472c49739a2d0f3e648c775d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 250.45692386366579,
+        "Y": 789.49843892561012
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "056fc71b1c5e4c0abec7d996ef1e2f88",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -199.67776816218361,
+        "Y": 795.20880711351708
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "a6db8fe28c4647009d98d2d21a2c6eea",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -191.67132676567667,
+        "Y": 893.03781034527947
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "AttributeMatrix.AllUpToLevel",
+        "Id": "0eb1fe948524446db2346d6c32d02064",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 589.59426321128058,
+        "Y": 594.2692992960616
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "6564d96420414cfbb3c33e1460aa2a8b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 410.93239531424967,
+        "Y": 591.40806826404867
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "AttributeFavourite.ToData",
+        "Id": "9680f7dcb9a548759ef0dd87a844ae13",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1746.0122077076478,
+        "Y": 432.21349655618519
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "4e9bc0299e3e47229b0e1274e4330335",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2358.2233869216752,
+        "Y": 350.18797565751765
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "9ce6b4207f804779b0e266bda3663ccb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2514.49078818054,
+        "Y": 352.03946048012153
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "AttributeFavourite.ToData",
+        "Id": "78cf96a848804457bb7a7f026c170836",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1748.9731653729475,
+        "Y": 211.77081394611125
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "2ad74574fae54f58acae7f1b0c281892",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2353.4935175504247,
+        "Y": -28.932684111082551
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "0f2af184e74a4e5da5afcec4bfe6c214",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2574.6617228067353,
+        "Y": -25.917130121289347
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "9fd00f31c7354c0c8b8751c15f67e262",
+        "Title": "LOI Definition",
+        "Nodes": [
+          "4f5e62a1472c49739a2d0f3e648c775d",
+          "056fc71b1c5e4c0abec7d996ef1e2f88",
+          "a6db8fe28c4647009d98d2d21a2c6eea",
+          "0eb1fe948524446db2346d6c32d02064",
+          "6564d96420414cfbb3c33e1460aa2a8b"
+        ],
+        "Left": -209.67776816218361,
+        "Top": 538.20806826404862,
+        "Width": 1104.4720313734642,
+        "Height": 447.42974208123087,
+        "FontSize": 36.0,
+        "InitialTop": 591.40806826404867,
+        "InitialHeight": 424.22974208123082,
+        "TextblockHeight": 43.2,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "1a424c73347841f7a49702ade3162f00",
+        "Title": "Reading definition and favourite template",
+        "Nodes": [
+          "de696f61142c431ba51b7e07c953c90c",
+          "3a71f92adc6a40e5bc2a791736372267",
+          "4eba654cfe6a43d88820b3c2154955b4",
+          "b5e6fb2af54c40a7ab96bbba329b58df",
+          "759736f50e154adab806c2fa3b6233bc",
+          "76b3ed288c4947fc96e202daec094c6d",
+          "13deac819c42461092d24e49eee0c521",
+          "0650643a6cde4a4db2fed304cb447aa2"
+        ],
+        "Left": -217.69697139247603,
+        "Top": -28.999439703536709,
+        "Width": 1271.375219255196,
+        "Height": 493.51826754178887,
+        "FontSize": 36.0,
+        "InitialTop": 24.200560296463294,
+        "InitialHeight": 470.31826754178883,
+        "TextblockHeight": 43.2,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": 190.86426698128048,
+    "Y": 84.824881182471756,
+    "Zoom": 0.28087505471164687
+  }
+}
