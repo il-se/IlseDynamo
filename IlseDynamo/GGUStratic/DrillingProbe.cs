@@ -5,6 +5,8 @@ using System.Linq;
 
 using Autodesk.DesignScript.Geometry;
 
+using GGUStratic.Data;
+
 namespace GGUStratic
 {
     /// <summary>

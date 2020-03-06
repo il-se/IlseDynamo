@@ -3,8 +3,13 @@ using System.Linq;
 
 using Autodesk.DesignScript.Geometry;
 
+using GGUStratic.Data;
+
 namespace GGUStratic
 {
+    /// <summary>
+    /// Wrap GGU stratic soil layer / probes export files.
+    /// </summary>
     public class DrillingProbes
     {
         #region Internals

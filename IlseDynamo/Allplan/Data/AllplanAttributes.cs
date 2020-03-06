@@ -8,6 +8,8 @@ using System.Collections.Generic;
 
 using Autodesk.DesignScript.Runtime;
 
+#pragma warning disable CS1591 // Missing comments only public methods / accessors
+
 namespace Allplan.Data
 {
     [IsVisibleInDynamoLibrary(false)]
@@ -30,8 +32,19 @@ namespace Allplan.Data
             }
         }
 
+        private void Update55()
+        {
+            var a55 = AttributeSet.Attributes.FirstOrDefault(a => a.IfNr == 55);
+            if (null == a55)
+                AttributeSet.Attributes.Add( a55 = new AllplanAttribute { IfNr = 55, Suffix = "Y" } );
+
+            a55.Value = string.Join(" ", AttributeSet.Attributes.Select(a => a.IfNr).Where(ifnr => 55 != ifnr));
+        }
+
         internal XmlWriter WriteTo(XmlWriter writer)
         {
+            Update55();
+
             writer.WriteStartElement(ELEMENT_NAME);
             writer.WriteAttributeString("VERSION", Version);
             writer.WriteAttributeString("FILETYPE", FileType);
@@ -58,6 +71,20 @@ namespace Allplan.Data
 
                 throw new NotSupportedException("Unexpected end of file");
             }
+        }
+
+        public static AllplanAttributesContainer Create(IEnumerable<AttributeDefinition> attributeDefinitions, string version)
+        {
+            return new AllplanAttributesContainer
+            {
+                Version = version,
+                FileType = "Attribute-Favorit (*.atfanfx)",
+                AttributeSet = new AllplanAttributeSet
+                {
+                    Key = "0 0 0 0 0 0 0 0",
+                    Attributes = attributeDefinitions.Select(a => new AllplanAttribute { IfNr = a.Ifnr, Suffix = a.Datatype, Value = "" }).ToList()
+                }
+            };
         }
 
         public AllplanAttributesContainer FilterByIfNr(long[] ifnrArray)
@@ -248,3 +275,5 @@ namespace Allplan.Data
         }
     }
 }
+
+#pragma warning restore CS1591 // Missing comments only public methods / accessors
