@@ -16,6 +16,8 @@ namespace Allplan
     {
         #region Internal
 
+        internal const string EXTENSION = ".atfanfx";
+
         private string FileName { get; set; }
         private AllplanAttributesContainer AttributeContainer { get; set; }
 
@@ -40,29 +42,24 @@ namespace Allplan
         }
 
         /// <summary>
-        /// Save this favourite as XML file using existing file name.
-        /// </summary>
-        public void Save()
-        {
-            AttributeContainer.WriteTo(FileName);
-        }
-
-        /// <summary>
         /// Saves this favourite as new XML file (using atfanfx-extension).
         /// </summary>
-        /// <param name="fileName">The file name</param>
-        public void SaveAs(string fileName)
+        /// <param name="pathName">The file name</param>
+        /// <returns>The written file name</returns>
+        public string SaveAs(string pathName)
         {
-            AttributeContainer.WriteTo(fileName);
+            var trimmedPath = Path.GetDirectoryName(pathName);
+            var finalFilePath = $"{trimmedPath}{Path.DirectorySeparatorChar}{Name}{EXTENSION}";
+            AttributeContainer.WriteTo(finalFilePath);
+            return finalFilePath;
         }
 
         /// <summary>
         /// Gets the file name (without extension and path).
-        /// </summary>
-        /// <returns>The file name</returns>
-        public string GetName()
+        /// </summary>        
+        public string Name
         {
-            return Path.GetFileNameWithoutExtension(FileName);
+            get => Path.GetFileNameWithoutExtension(FileName);
         }
 
         /// <summary>
@@ -97,12 +94,18 @@ namespace Allplan
             var nameSet = new HashSet<string>(attributeLevel.Attributes);
             return new AttributeFavourite
             {
-                FileName = null,
+                FileName = $"{attributeLevel.Level}",
                 AttributeContainer = AllplanAttributesContainer.Create(
                     attributeDefinition.DefinitionCollection.AttributeDefinition.Where(a => nameSet.Contains(a.Text)), "2019")
             };
         }
 
+        /// <summary>
+        /// Creates a new favourite by given LOI and definition.
+        /// </summary>
+        /// <param name="attributeLevel">The required minium level</param>
+        /// <param name="attributeDefinition">The attribute definition</param>
+        /// <returns>A new favourite</returns>
         public AttributeFavourite OfLevel(AttributeLevel attributeLevel, AttributeDefinition attributeDefinition)
         {
             var nameSet = new HashSet<string>(attributeLevel.Attributes);
@@ -113,6 +116,7 @@ namespace Allplan
 
             return new AttributeFavourite
             {
+                FileName = $"{Path.GetDirectoryName(FileName)}{Path.DirectorySeparatorChar}{Name}_{attributeLevel.Level}{EXTENSION}",
                 AttributeContainer = AttributeContainer.FilterByIfNr(ifnrSet)
             };
         }
@@ -130,6 +134,18 @@ namespace Allplan
             };
         }
 
+        internal IEnumerable<Tuple<string, string>> ToAttributeValue(AttributeDefinition attributeDefinition)
+        {
+            var ifnrMap = attributeDefinition
+                .DefinitionCollection
+                .AttributeDefinition
+                .ToDictionary(a => a.Ifnr);
+
+            return AttributeContainer?.AttributeSet
+                .Attributes
+                .Select(a => new Tuple<string, string>(ifnrMap[a.IfNr]?.Text, a.Value));
+        }
+
         /// <summary>
         /// Dumps the data of favourite using the given defintion for resolving.
         /// </summary>
@@ -138,7 +154,11 @@ namespace Allplan
         [MultiReturn("name", "value")]
         public Dictionary<string, object> ToData(AttributeDefinition attributeDefinition)
         {
-            var ifnrMap = attributeDefinition.DefinitionCollection.AttributeDefinition.ToDictionary(a => a.Ifnr);
+            var ifnrMap = attributeDefinition
+                .DefinitionCollection
+                .AttributeDefinition
+                .ToDictionary(a => a.Ifnr);
+
             return new Dictionary<string, object>()
             {
                 { "name", AttributeContainer?.AttributeSet.Attributes.Select(a => ifnrMap[a.IfNr]?.Text) },
@@ -160,5 +180,29 @@ namespace Allplan
             };
         }
 
+        /// <summary>
+        /// Returns unique attribute names.
+        /// </summary>
+        /// <param name="attributeDefinition">The attribute defintion</param>
+        /// <param name="attributeFavourites">The favourites</param>
+        /// <returns></returns>
+        public static string[] GetUniqueAttributeNames(AttributeDefinition attributeDefinition, AttributeFavourite[] attributeFavourites)
+        {
+            var ifnrMap = attributeDefinition
+                .DefinitionCollection
+                .AttributeDefinition
+                .ToDictionary(a => a.Ifnr);
+
+            return attributeFavourites
+                .SelectMany(af => af.AttributeContainer.AttributeSet.Attributes.Select(a => ifnrMap[a.IfNr]?.Text))
+                .Where(n => !string.IsNullOrEmpty(n))
+                .Distinct()
+                .ToArray();
+        }
+
+        public static string[][] GetAttributeValueMatrix(AttributeDefinition attributeDefinition)
+        {
+            return null;
+        }
     }
 }
