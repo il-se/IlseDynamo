@@ -48,7 +48,7 @@ namespace Allplan
         /// <returns>The written file name</returns>
         public string SaveAs(string pathName)
         {
-            var trimmedPath = Path.GetDirectoryName(pathName);
+            var trimmedPath = Path.GetDirectoryName($"{pathName}{Path.DirectorySeparatorChar}");
             var finalFilePath = $"{trimmedPath}{Path.DirectorySeparatorChar}{Name}{EXTENSION}";
             AttributeContainer.WriteTo(finalFilePath);
             return finalFilePath;
@@ -186,7 +186,7 @@ namespace Allplan
         /// <param name="attributeDefinition">The attribute defintion</param>
         /// <param name="attributeFavourites">The favourites</param>
         /// <returns></returns>
-        public static string[] GetUniqueAttributeNames(AttributeDefinition attributeDefinition, AttributeFavourite[] attributeFavourites)
+        public static string[] ToAttributeNames(AttributeDefinition attributeDefinition, AttributeFavourite[] attributeFavourites)
         {
             var ifnrMap = attributeDefinition
                 .DefinitionCollection
@@ -200,9 +200,72 @@ namespace Allplan
                 .ToArray();
         }
 
-        public static string[][] GetAttributeValueMatrix(AttributeDefinition attributeDefinition)
+        /// <summary>
+        /// Dumps a matrix of attribute names versus values for each favourite.
+        /// </summary>
+        /// <param name="attributeDefinition">The definition</param>
+        /// <param name="attributeFavourites">The favourites</param>
+        /// <param name="header">The attibute name header</param>
+        /// <returns>A matrix where each rows is a favourite and columns denote the attribute values</returns>
+        internal static string[][] ToAttributeValueData(AttributeDefinition attributeDefinition, 
+            IEnumerable<AttributeFavourite> attributeFavourites, Tuple<string, int>[] header)
         {
-            return null;
+            List<string[]> rows = new List<string[]>();
+
+            // Generate header
+            rows.Add(new string[header.Length + 1]);
+            foreach (var e in header)
+                rows[0][e.Item2 + 1] = e.Item1;
+
+            foreach (var af in attributeFavourites)
+            {
+                // First column as favourite name
+                string[] row = new string[header.Length + 1];
+                row[0] = af.Name;
+
+                // Generate favourite of given level
+                var data = af
+                    .ToAttributeValue(attributeDefinition)
+                    .ToDictionary(a => a.Item1, a => a.Item2);
+
+                // Fill in data
+                foreach (var e in header)
+                {
+                    if (data.ContainsKey(e.Item1))
+                        row[e.Item2 + 1] = data[e.Item1];
+                    else
+                        row[e.Item2 + 1] = "";
+                }
+                rows.Add(row);
+            }
+
+            return rows.ToArray();
+        }
+
+        /// <summary>
+        /// Dumps a matrix of attribute names versus values for each favourite.
+        /// The header reflects unique sorted attribute names.
+        /// </summary>
+        /// <param name="attributeDefinition">The definition</param>
+        /// <param name="attributeFavourites">The favourites</param>
+        /// <returns>A matrix where each rows is a favourite and columns denote the attribute values</returns>
+        public static string[][] ToAttributeValueData(AttributeDefinition attributeDefinition, AttributeFavourite[] attributeFavourites)
+        {
+            var header = ToAttributeNames(attributeDefinition, attributeFavourites)
+                .OrderBy(a => a)
+                .Select((a, i) => new Tuple<string, int>(a, i))
+                .ToArray();
+
+            return ToAttributeValueData(attributeDefinition, attributeFavourites, header);
+        }
+
+        /// <summary>
+        /// Generates a custom string representation.
+        /// </summary>
+        /// <returns>String representation</returns>
+        public override string ToString()
+        {
+            return $"{Name} ({AttributeContainer.Version}) ({AttributeContainer.AttributeSet.Attributes.Count})";
         }
     }
 }

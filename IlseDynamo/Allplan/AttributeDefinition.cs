@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -204,6 +205,15 @@ namespace Allplan
                 { "datatype", DefinitionCollection.AttributeDefinition.Select(a => a.Datatype).ToArray() },
                 { "parentGroup", DefinitionCollection.AttributeDefinition.Select(a => a.ParentUserDirCode).ToArray() },
             };
+        }
+
+        /// <summary>
+        /// Generates a custom string representation.
+        /// </summary>
+        /// <returns>String representation</returns>
+        public override string ToString()
+        {
+            return $"{Path.GetFileName(FileName)} ({DefinitionCollection.Region}, {DefinitionCollection.AttributeDefinition.Count})";
         }
     }
 }

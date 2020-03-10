@@ -58,53 +58,6 @@ namespace Allplan
         }
 
         /// <summary>
-        /// Gets the attribute value matrix of a given attribute level.
-        /// </summary>
-        /// <param name="attributeDefinition">The definition</param>
-        /// <param name="attributeLevel">The attribute level</param>
-        /// <param name="attributeFavourites">The template favourites</param>
-        /// <returns>A data matrix of favourite names versus attribute values</returns>
-        public string[][] GetAttributeValueMatrix(AttributeDefinition attributeDefinition, AttributeLevel attributeLevel, AttributeFavourite[] attributeFavourites)
-        {
-            List<string[]> rows = new List<string[]>();
-
-            var header = attributeLevel.Attributes
-                .OrderBy(a => a)
-                .Select((a, i) => new Tuple<string, int>(a, i))
-                .ToArray();
-
-            // Generate header
-            rows.Add(new string[attributeLevel.Attributes.Length + 1]);
-            foreach (var e in header)
-                rows[0][e.Item2 + 1] = e.Item1;
-
-            foreach (var af in attributeFavourites)
-            {
-                // First column as favourite name
-                string[] row = new string[attributeLevel.Attributes.Length + 1];                
-                row[0] = af.Name;
-
-                // Generate favourite of given level
-                var levelFavourite = af.OfLevel(attributeLevel, attributeDefinition);
-                var data = levelFavourite
-                    .ToAttributeValue(attributeDefinition)
-                    .ToDictionary(a => a.Item1, a => a.Item2);
-
-                // Fill in data
-                foreach (var e in header)
-                {
-                    if (data.ContainsKey(e.Item1))
-                        row[e.Item2 + 1] = data[e.Item1];
-                    else
-                        row[e.Item2 + 1] = "";
-                }
-                rows.Add(row);
-            }
-
-            return rows.ToArray();
-        }
-
-        /// <summary>
         /// New LOI definitions by given data import.
         /// </summary>
         /// <param name="levelAndAttribute">Rowwise data with <c>Level index</c> and <c>Attribute name</c></param>
@@ -114,6 +67,11 @@ namespace Allplan
             return ByData(levelAndAttribute.Select(r => new Tuple<int, string>(int.Parse(r[0].ToString()), r[1].ToString())));
         }
 
+        /// <summary>
+        /// Imports an attribute matrix by given data matrix.
+        /// </summary>
+        /// <param name="levelAndAttribute">Rowwise data</param>
+        /// <returns>A new matrix</returns>
         private static AttributeMatrix ByData(IEnumerable<Tuple<int, string>> levelAndAttribute)
         {
             var matrix = new AttributeMatrix();
@@ -126,6 +84,12 @@ namespace Allplan
             return matrix;
         }
 
+        /// <summary>
+        /// Imports an attribute matrix by given data matrix.
+        /// </summary>
+        /// <param name="levels">The level data</param>
+        /// <param name="attributeNames">The attribute per level data</param>
+        /// <returns>A new matrix</returns>
         public static AttributeMatrix ByData(int[] levels, string[] attributeNames)
         {
             return ByData(Enumerable.Range(0, Math.Min(levels.Length, attributeNames.Length)).Select(i => new Tuple<int, string>(levels[i], attributeNames[i])));
