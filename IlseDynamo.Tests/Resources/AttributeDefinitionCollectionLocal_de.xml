@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<AttributeDefinitionCollection Region="DE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Xsd/AttributeDefinitionCollection.xsd">
+  <AttributeDefinition>
+    <Uid>e8173c5e-895f-49ee-857e-69a52b67cbcb</Uid>
+    <Ifnr>6010</Ifnr>
+    <Text>Schutzwandbauteil</Text>
+    <MinValue>0</MinValue>
+    <MaxValue>60</MaxValue>
+    <Datatype>C</Datatype>
+    <Group>1</Group>
+    <!--Group 1: ATTR_PRG_BEREICH_BENUTZER-->
+    <Modify>true</Modify>
+    <Visible>true</Visible>
+    <PropertyBitMask>0</PropertyBitMask>
+    <FunctionPointer>FUNC:0;</FunctionPointer>
+    <ParentUserDirCode>42</ParentUserDirCode>
+    <ComboBox />
+  </AttributeDefinition>
+  <AttributeDefinition>
+    <Uid>f91ebf0c-e58e-4d20-8205-c872d53b844d</Uid>
+    <Ifnr>6012</Ifnr>
+    <Text>Schalldaemmung</Text>
+    <MinValue>0</MinValue>
+    <MaxValue>60</MaxValue>
+    <Datatype>C</Datatype>
+    <Group>1</Group>
+    <!--Group 1: ATTR_PRG_BEREICH_BENUTZER-->
+    <Modify>true</Modify>
+    <Visible>true</Visible>
+    <PropertyBitMask>0</PropertyBitMask>
+    <FunctionPointer>FUNC:0;</FunctionPointer>
+    <ParentUserDirCode>62</ParentUserDirCode>
+    <ComboBox>
+      <Item>
+        <Key>0</Key>
+        <Value>B1</Value>
+      </Item>
+      <Item>
+        <Key>1</Key>
+        <Value>B2</Value>
+      </Item>
+      <Item>
+        <Key>2</Key>
+        <Value>B3</Value>
+      </Item>
+    </ComboBox>
+  </AttributeDefinition>
+  <AttributeDefinition>
+    <Uid>f0e704b2-e61b-40b9-a4ad-9d4cbb859106</Uid>
+    <Ifnr>6013</Ifnr>
+    <Text>Schallabsorption</Text>
+    <MinValue>0</MinValue>
+    <MaxValue>60</MaxValue>
+    <Datatype>C</Datatype>
+    <Group>1</Group>
+    <!--Group 1: ATTR_PRG_BEREICH_BENUTZER-->
+    <Modify>true</Modify>
+    <Visible>true</Visible>
+    <PropertyBitMask>0</PropertyBitMask>
+    <FunctionPointer>FUNC:0;</FunctionPointer>
+    <ParentUserDirCode>62</ParentUserDirCode>
+    <ComboBox>
+      <Item>
+        <Key>0</Key>
+        <Value>A1</Value>
+      </Item>
+      <Item>
+        <Key>1</Key>
+        <Value>A2</Value>
+      </Item>
+      <Item>
+        <Key>2</Key>
+        <Value>A3</Value>
+      </Item>
+    </ComboBox>
+  </AttributeDefinition>
+  <AttributeDefinition>
+    <Uid>2da6a988-7fe0-4972-b350-ebf0a03ff7f0</Uid>
+    <Ifnr>6014</Ifnr>
+    <Text>Datenquelle</Text>
+    <MinValue>0</MinValue>
+    <MaxValue>60</MaxValue>
+    <Datatype>C</Datatype>
+    <Group>1</Group>
+    <!--Group 1: ATTR_PRG_BEREICH_BENUTZER-->
+    <Modify>true</Modify>
+    <Visible>true</Visible>
+    <PropertyBitMask>0</PropertyBitMask>
+    <FunctionPointer>FUNC:0;</FunctionPointer>
+    <ParentUserDirCode>64</ParentUserDirCode>
+    <TextBox />
+  </AttributeDefinition>
+  <AttributeDefinition>
+    <Uid>7e3377eb-3eba-45e5-a3db-65ddd6d95b01</Uid>
+    <Ifnr>6015</Ifnr>
+    <Text>Vertrauenslevel</Text>
+    <MinValue>0</MinValue>
+    <MaxValue>35</MaxValue>
+    <Datatype>C</Datatype>
+    <Group>1</Group>
+    <!--Group 1: ATTR_PRG_BEREICH_BENUTZER-->
+    <Modify>true</Modify>
+    <Visible>true</Visible>
+    <PropertyBitMask>0</PropertyBitMask>
+    <FunctionPointer>FUNC:0;</FunctionPointer>
+    <ParentUserDirCode>64</ParentUserDirCode>
+    <ComboBox />
+  </AttributeDefinition>
+</AttributeDefinitionCollection>
