@@ -92,6 +92,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\IlseDynamoImages.resx">
+      <Generator></Generator>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
 
@@ -101,6 +105,24 @@
     </None>
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Solibri\" />
+  </ItemGroup>
+
+  <!-- PrePostBuild -->
+  <Target Name="BuildPackageImages" BeforeTargets="PostBuildEvent">
+    <Message Importance="High" Text="Building node icon resources ..." />
+    <GetReferenceAssemblyPaths TargetFrameworkMoniker=".NETFramework, Version=v2.0">
+      <Output TaskParameter="FullFrameworkReferenceAssemblyPaths" PropertyName="FrameworkAssembliesPath" />
+    </GetReferenceAssemblyPaths>
+    <GetAssemblyIdentity AssemblyFiles="$(OutDir)$(TargetName).dll">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyInfo" />
+    </GetAssemblyIdentity>
+    <GenerateResource UseSourcePath="true" Sources="$(ProjectDir)\Resources\IlseDynamoImages.resx" OutputResources="$(ProjectDir)\Resources\IlseDynamoImages.resources" References="$(FrameworkAssembliesPath)System.Drawing.dll" />
+    <AL TargetType="library" EmbedResources="$(ProjectDir)\Resources\IlseDynamoImages.resources" OutputAssembly="$(TargetDir)IlseDynamo.customization.dll" />
+  </Target>
+
   <!-- After build -->
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <PropertyGroup>
@@ -108,7 +130,7 @@
       <DeployFolder Condition="'$(Configuration)' == 'Release'">$(AppData)\Dynamo\Dynamo Revit\2.5\packages\$(ProjectName)</DeployFolder>
     </PropertyGroup>
     
-    <Message Importance="High" Text="Started building the Dynamo package" />
+    <Message Importance="High" Text="Started building the Dynamo package ..." />
 
     <ItemGroup>
       <SourceDlls Include="$(TargetDir)Ilse*.dll" />
@@ -127,13 +149,13 @@
     <Copy SourceFiles="@(SourcePkg)" DestinationFolder="$(DeployFolder)" />
     <Copy SourceFiles="@(SourceXmls)" DestinationFolder="$(DeployFolder)\bin\" />
     <!-- <Copy SourceFiles="@(SourceExtension)" DestinationFolder="$(DeployFolder)\extra" /> -->
-    <Message Importance="High" Text="Built to $(TargetDir)\$(ProjectName)" />
+    <Message Importance="High" Text="Built to $(TargetDir)\$(ProjectName)." />
     
     <ItemGroup>
       <SourcePackage Include="$(TargetDir)\$(ProjectName)\**\*" />
     </ItemGroup>
     
-    <Message Importance="High" Text="Deployed to $(DeployFolder)" />
+    <Message Importance="High" Text="Deployed to $(DeployFolder)." />
   </Target>
   
 </Project>
