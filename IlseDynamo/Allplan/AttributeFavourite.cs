@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
+using Internal;
 using Allplan.Data;
 
 using Autodesk.DesignScript.Runtime;
@@ -19,6 +20,7 @@ namespace Allplan
         internal const string EXTENSION = ".atfanfx";
 
         private string FileName { get; set; }
+        private string BasePath { get; set; }
         private AllplanAttributesContainer AttributeContainer { get; set; }
 
         internal AttributeFavourite()
@@ -31,25 +33,60 @@ namespace Allplan
         /// Imports an Allplan Favourite file.
         /// </summary>
         /// <param name="fileName">The file name</param>
+        /// <param name="basePath">If given, a save will keep folder hierarchy the same as input hierarchy</param>
         /// <returns>A favourite</returns>
-        public static AttributeFavourite ByFileName(string fileName)
+        public static AttributeFavourite ByFileName(string fileName, string basePath = null)
         {
             return new AttributeFavourite
             {
                 FileName = fileName,
+                BasePath = basePath,
                 AttributeContainer = AllplanAttributesContainer.ReadFrom(fileName)
             };
         }
 
         /// <summary>
+        /// Returns the base folder name (if set).
+        /// </summary>
+        public string BaseFolder
+        {
+            get {
+                var baseFolder = BasePath?.Trim() ?? Path.GetDirectoryName(FileName);
+                if (!baseFolder.EndsWith($"{Path.DirectorySeparatorChar}"))
+                    return $"{baseFolder}{Path.DirectorySeparatorChar}";
+                else
+                    return $"{baseFolder}";
+            }
+        }
+
+        /// <summary>
+        /// Returns the local folder relative to the base path.
+        /// </summary>
+        public string Folder
+        {
+            get {
+                var folder = $"{Path.GetDirectoryName(FileName)}{Path.DirectorySeparatorChar}".RelativePathOf(BaseFolder);
+                if (string.IsNullOrEmpty(folder) || folder.EndsWith($"{Path.DirectorySeparatorChar}"))
+                    return folder.Trim();
+                else 
+                    return $"{folder}{Path.DirectorySeparatorChar}";
+            }
+        }
+
+        /// <summary>
         /// Saves this favourite as new XML file (using atfanfx-extension).
         /// </summary>
-        /// <param name="pathName">The file name</param>
+        /// <param name="basePathName">The file name</param>
         /// <returns>The written file name</returns>
-        public string SaveAs(string pathName)
+        public string SaveAs(string basePathName)
         {
-            var trimmedPath = Path.GetDirectoryName($"{pathName}{Path.DirectorySeparatorChar}");
-            var finalFilePath = $"{trimmedPath}{Path.DirectorySeparatorChar}{Name}{EXTENSION}";
+            var trimmedPath = Path.GetDirectoryName($"{basePathName}{Path.DirectorySeparatorChar}");
+            var finalFilePath = $"{trimmedPath}{Path.DirectorySeparatorChar}{Folder}{Name}{EXTENSION}";
+
+            var dirInfo = Directory.CreateDirectory(Path.GetDirectoryName(finalFilePath));
+            if (!dirInfo.Exists)
+                throw new Exception($"Path {dirInfo.FullName} isn't existing.");
+
             AttributeContainer.WriteTo(finalFilePath);
             return finalFilePath;
         }
@@ -79,6 +116,8 @@ namespace Allplan
 
             return new AttributeFavourite
             {
+                BasePath = BasePath,
+                FileName = FileName,
                 AttributeContainer = AttributeContainer?.ExcludeByIfNr(ifNrSet)
             };
         }
@@ -96,7 +135,9 @@ namespace Allplan
             {
                 FileName = $"{attributeLevel.Level}",
                 AttributeContainer = AllplanAttributesContainer.Create(
-                    attributeDefinition.DefinitionCollection.AttributeDefinition.Where(a => nameSet.Contains(a.Text)), "2019")
+                    attributeDefinition.DefinitionCollection
+                    .AttributeDefinition
+                    .Where(a => nameSet.Contains(a.Text)), "2019")
             };
         }
 
@@ -117,6 +158,7 @@ namespace Allplan
             return new AttributeFavourite
             {
                 FileName = $"{Path.GetDirectoryName(FileName)}{Path.DirectorySeparatorChar}{Name}_{attributeLevel.Level}{EXTENSION}",
+                BasePath = BasePath,
                 AttributeContainer = AttributeContainer.FilterByIfNr(ifnrSet)
             };
         }
@@ -130,6 +172,8 @@ namespace Allplan
         {
             return new AttributeFavourite
             {
+                FileName = FileName,
+                BasePath = BasePath,
                 AttributeContainer = AttributeContainer?.ExcludeByIfNr(ifnr)
             };
         }
@@ -143,7 +187,7 @@ namespace Allplan
 
             return AttributeContainer?.AttributeSet
                 .Attributes
-                .Select(a => new Tuple<string, string>(ifnrMap[a.IfNr]?.Text, a.Value));
+                .Select(a => new Tuple<string, string>(ifnrMap[a.Ifnr]?.Text, a.Value));
         }
 
         /// <summary>
@@ -151,7 +195,7 @@ namespace Allplan
         /// </summary>
         /// <param name="attributeDefinition">The definition to resolve IFNR against</param>
         /// <returns>Data of favourite</returns>
-        [MultiReturn("name", "value")]
+        [MultiReturn("name", "value", "unknown")]
         public Dictionary<string, object> ToData(AttributeDefinition attributeDefinition)
         {
             var ifnrMap = attributeDefinition
@@ -161,8 +205,20 @@ namespace Allplan
 
             return new Dictionary<string, object>()
             {
-                { "name", AttributeContainer?.AttributeSet.Attributes.Select(a => ifnrMap[a.IfNr]?.Text) },
-                { "value", AttributeContainer?.AttributeSet.Attributes.Select(a => a.Value) }
+                { "name", AttributeContainer?
+                        .AttributeSet
+                        .Attributes
+                        .Where(a => ifnrMap.ContainsKey(a.Ifnr))
+                        .Select(a => ifnrMap[a.Ifnr]?.Text ?? $"{a.Ifnr}") },
+                { "value", AttributeContainer?
+                        .AttributeSet
+                        .Attributes
+                        .Select(a => a.Value) },
+                { "unknown", AttributeContainer?
+                        .AttributeSet
+                        .Attributes
+                        .Where(a => !ifnrMap.ContainsKey(a.Ifnr))
+                        .Select(a => a.Ifnr) }
             };
         }
 
@@ -175,7 +231,7 @@ namespace Allplan
         {
             return new Dictionary<string, object>()
             {
-                { "ifnr", AttributeContainer?.AttributeSet.Attributes.Select(a => a.IfNr) },
+                { "ifnr", AttributeContainer?.AttributeSet.Attributes.Select(a => a.Ifnr) },
                 { "value", AttributeContainer?.AttributeSet.Attributes.Select(a => a.Value) }
             };
         }
@@ -185,16 +241,28 @@ namespace Allplan
         /// </summary>
         /// <param name="attributeDefinition">The attribute defintion</param>
         /// <param name="attributeFavourites">The favourites</param>
-        /// <returns></returns>
-        public static string[] ToAttributeNames(AttributeDefinition attributeDefinition, AttributeFavourite[] attributeFavourites)
+        /// <param name="excludeByIfnr">Attribute to be excluded given its <c>Ifnr</c></param>
+        /// <returns>An array of names</returns>
+        public static string[] ToAttributeNames(AttributeDefinition attributeDefinition, AttributeFavourite[] attributeFavourites, long[] excludeByIfnr)
         {
+            if (null == attributeDefinition || null == attributeFavourites)
+                return new string[] { };
+
+            long[] blackListIfNr = null != excludeByIfnr ? excludeByIfnr : new long[0];
+            Array.Sort(blackListIfNr);
+
             var ifnrMap = attributeDefinition
                 .DefinitionCollection
                 .AttributeDefinition
+                .Where(a => Array.BinarySearch(blackListIfNr, a.Ifnr) < 0) // Only those which are not in the blacklist
                 .ToDictionary(a => a.Ifnr);
 
             return attributeFavourites
-                .SelectMany(af => af.AttributeContainer.AttributeSet.Attributes.Select(a => ifnrMap[a.IfNr]?.Text))
+                .SelectMany(af => af.AttributeContainer
+                    .AttributeSet
+                    .Attributes
+                    .Where(a => Array.BinarySearch(blackListIfNr, a.Ifnr) < 0) // Only those which are not in the blacklist
+                    .Select(a => ifnrMap[a.Ifnr]?.Text))
                 .Where(n => !string.IsNullOrEmpty(n))
                 .Distinct()
                 .ToArray();
@@ -210,6 +278,9 @@ namespace Allplan
         internal static string[][] ToAttributeValueData(AttributeDefinition attributeDefinition, 
             IEnumerable<AttributeFavourite> attributeFavourites, Tuple<string, int>[] header)
         {
+            if (null == attributeDefinition || null == attributeFavourites)
+                return new string[][] { };
+
             List<string[]> rows = new List<string[]>();
 
             // Generate header
@@ -248,10 +319,11 @@ namespace Allplan
         /// </summary>
         /// <param name="attributeDefinition">The definition</param>
         /// <param name="attributeFavourites">The favourites</param>
+        /// <param name="excludeByIfnr">Attribute to be excluded given its <c>Ifnr</c></param>
         /// <returns>A matrix where each rows is a favourite and columns denote the attribute values</returns>
-        public static string[][] ToAttributeValueData(AttributeDefinition attributeDefinition, AttributeFavourite[] attributeFavourites)
+        public static string[][] ToAttributeValueData(AttributeDefinition attributeDefinition, AttributeFavourite[] attributeFavourites, long[] excludeByIfnr)
         {
-            var header = ToAttributeNames(attributeDefinition, attributeFavourites)
+            var header = ToAttributeNames(attributeDefinition, attributeFavourites, excludeByIfnr)
                 .OrderBy(a => a)
                 .Select((a, i) => new Tuple<string, int>(a, i))
                 .ToArray();

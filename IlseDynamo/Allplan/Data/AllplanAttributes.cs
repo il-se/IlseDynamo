@@ -25,7 +25,13 @@ namespace Allplan.Data
         public void WriteTo(string fileName)
         {
             using(var writer = XmlWriter.Create(
-                File.Create(fileName), new XmlWriterSettings { CloseOutput = true, Encoding = new UnicodeEncoding()}))
+                File.Create(fileName), new XmlWriterSettings 
+                { 
+                    CloseOutput = true, 
+                    Indent = true,
+                    NewLineHandling = NewLineHandling.Replace,
+                    Encoding = new UnicodeEncoding()
+                }))
             {
                 WriteTo(writer);
                 writer.Close();
@@ -34,11 +40,11 @@ namespace Allplan.Data
 
         private void Update55()
         {
-            var a55 = AttributeSet.Attributes.FirstOrDefault(a => a.IfNr == 55);
+            var a55 = AttributeSet.Attributes.FirstOrDefault(a => a.Ifnr == 55);
             if (null == a55)
-                AttributeSet.Attributes.Add( a55 = new AllplanAttribute { IfNr = 55, Suffix = "Y" } );
+                AttributeSet.Attributes.Add( a55 = new AllplanAttribute { Ifnr = 55, Suffix = "Y" } );
 
-            a55.Value = string.Join(" ", AttributeSet.Attributes.Select(a => a.IfNr).Where(ifnr => 55 != ifnr));
+            a55.Value = string.Join(" ", AttributeSet.Attributes.Select(a => a.Ifnr).Where(ifnr => 55 != ifnr));
         }
 
         internal XmlWriter WriteTo(XmlWriter writer)
@@ -82,7 +88,7 @@ namespace Allplan.Data
                 AttributeSet = new AllplanAttributeSet
                 {
                     Key = "0 0 0 0 0 0 0 0",
-                    Attributes = attributeDefinitions.Select(a => new AllplanAttribute { IfNr = a.Ifnr, Suffix = a.Datatype, Value = "" }).ToList()
+                    Attributes = attributeDefinitions.Select(a => new AllplanAttribute { Ifnr = a.Ifnr, Suffix = a.Datatype, Value = "" }).ToList()
                 }
             };
         }
@@ -97,7 +103,7 @@ namespace Allplan.Data
                 AttributeSet = new AllplanAttributeSet
                 {
                     Key = AttributeSet.Key,
-                    Attributes = AttributeSet.Attributes.Where(a => -1 < Array.BinarySearch(ifnrArray, a.IfNr)).ToList()
+                    Attributes = AttributeSet.Attributes.Where(a => -1 < Array.BinarySearch(ifnrArray, a.Ifnr)).ToList()
                 }
             };
         }
@@ -112,7 +118,7 @@ namespace Allplan.Data
                 AttributeSet = new AllplanAttributeSet
                 {
                     Key = AttributeSet.Key,
-                    Attributes = AttributeSet.Attributes.Where(a => 0 > Array.BinarySearch(ifnrArray, a.IfNr)).ToList()
+                    Attributes = AttributeSet.Attributes.Where(a => 0 > Array.BinarySearch(ifnrArray, a.Ifnr)).ToList()
                 }
             };
         }
@@ -207,14 +213,14 @@ namespace Allplan.Data
     {
         internal const string ELEMENT_NAME = "NEM_ATTRIB";
 
-        public long IfNr { get; set; }
+        public long Ifnr { get; set; }
         public string Value { get; set; }
         public string Suffix { get; set; }
 
         public override bool Equals(object obj)
         {
             return obj is AllplanAttribute attrib &&
-                   IfNr == attrib.IfNr &&
+                   Ifnr == attrib.Ifnr &&
                    Value == attrib.Value &&
                    Suffix == attrib.Suffix;
         }
@@ -227,7 +233,7 @@ namespace Allplan.Data
         public override int GetHashCode()
         {
             var hashCode = 1103233092;
-            hashCode = hashCode * -1521134295 + IfNr.GetHashCode();
+            hashCode = hashCode * -1521134295 + Ifnr.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Value);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Suffix);
             return hashCode;
@@ -236,7 +242,7 @@ namespace Allplan.Data
         internal XmlWriter WriteTo(XmlWriter writer)
         {
             writer.WriteStartElement($"{ELEMENT_NAME}_{Suffix}");
-            writer.WriteElementString("IFNR", $"{IfNr}");
+            writer.WriteElementString("IFNR", $"{Ifnr}");
             writer.WriteElementString("VALUE", Value);
             writer.WriteEndElement();
             return writer;
@@ -259,7 +265,7 @@ namespace Allplan.Data
                 {
                     case XmlNodeType.Element:
                         if (reader.Name.Equals("IFNR"))
-                            attrib.IfNr = long.Parse(reader.ReadElementContentAsString());
+                            attrib.Ifnr = long.Parse(reader.ReadElementContentAsString());
                         else if (reader.Name.Equals("VALUE"))
                             attrib.Value = reader.ReadElementContentAsString();
                         else

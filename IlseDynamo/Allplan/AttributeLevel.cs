@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Internal;
+
 using Autodesk.DesignScript.Runtime;
 
 namespace Allplan
@@ -25,10 +27,11 @@ namespace Allplan
         /// </summary>
         /// <param name="level">The level</param>
         /// <param name="attributes">The attributes</param>
-        /// <returns></returns>
-        public static AttributeLevel ByLevelAndAttributes(int level, string[] attributes)
+        /// <param name="ignoreCase">Whether being case sensitive or not. Default is false</param>
+        /// <returns>A new attribute level</returns>
+        public static AttributeLevel ByLevelAndAttributes(int level, string[] attributes, bool ignoreCase = false)
         {
-            var set = new HashSet<string>(attributes);
+            var set = attributes.ToSet(ignoreCase);
             return new AttributeLevel
             {
                 Level = level,
@@ -45,6 +48,31 @@ namespace Allplan
         /// The associated attribute names of this LOI.
         /// </summary>
         public string[] Attributes { get; set; } = new string[] { };
+
+        /// <summary>
+        /// Merges the given attribute names into the attribute level.
+        /// </summary>
+        /// <param name="attributes">An array of attribute names</param>
+        /// <param name="ignoreCase">Whether being case sensitive or not. Default is true</param>
+        /// <returns>A modified level</returns>
+        [MultiReturn("attributeLevel", "added")]
+        public Dictionary<string, object> Merge(string[] attributes, bool ignoreCase = true)
+        {
+            var set = Attributes.ToSet(ignoreCase);
+            var added = new List<string>();
+            foreach (var attribute in attributes)
+            {
+                if (set.Add(attribute))
+                    added.Add(attribute);
+            }
+
+            Attributes = set.ToArray();
+            return new Dictionary<string, object>()
+            {
+                { "attributeLevel", this },
+                { "added", added.ToArray() }
+            };
+        }
 
         /// <summary>
         /// Gets the attribute value matrix of this attribute level.
