@@ -32,7 +32,7 @@
   "Nodes": [
     {
       "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
-      "HintPath": "C:\\Workspace\\Git\\IlseDynamo\\IlseDynamo.Tests\\Resources\\GGUDrillingProfilesExample.xml",
+      "HintPath": "..\\IlseDynamo.Tests\\Resources\\GGUDrillingProfilesExample.xml",
       "InputValue": "..\\IlseDynamo.Tests\\Resources\\GGUDrillingProfilesExample.xml",
       "NodeType": "ExtensionNode",
       "Id": "99367ad1ee6f4c049f0e027289e9f8c2",
@@ -517,7 +517,7 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "GGUStratic.DrillingProbes.ByFileName@string",
+      "FunctionSignature": "GGUStratig.DrillingProbes.ByFileName@string",
       "Id": "6d1b5afbd22246edbc50cbbb933ed262",
       "Inputs": [
         {
@@ -547,13 +547,13 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "GGUStratic.DrillingProbes.GetProbeData",
+      "FunctionSignature": "GGUStratig.DrillingProbes.GetProbeData",
       "Id": "56c94c2746fc458ca2a4ed03b085addc",
       "Inputs": [
         {
           "Id": "a5e8e834a4294c968001d66ba0a137e5",
           "Name": "drillingProbes",
-          "Description": "GGUStratic.DrillingProbes",
+          "Description": "GGUStratig.DrillingProbes",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -577,13 +577,13 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "GGUStratic.DrillingProbes.GetMaxLayerCount",
+      "FunctionSignature": "GGUStratig.DrillingProbes.GetMaxLayerCount",
       "Id": "3a6aa22893fa41708b0b20e1cb89471b",
       "Inputs": [
         {
           "Id": "d53af69bd6e5487c987c6961e547cf0c",
           "Name": "drillingProbes",
-          "Description": "GGUStratic.DrillingProbes",
+          "Description": "GGUStratig.DrillingProbes",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -607,13 +607,13 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "GGUStratic.DrillingProbe.GetName",
+      "FunctionSignature": "GGUStratig.DrillingProbe.GetName",
       "Id": "d18a5b0cce524cd4a94117773f62f4af",
       "Inputs": [
         {
           "Id": "064ff01da66c4d9d959b5ad2112aecbe",
           "Name": "drillingProbe",
-          "Description": "GGUStratic.DrillingProbe",
+          "Description": "GGUStratig.DrillingProbe",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -637,13 +637,13 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "GGUStratic.DrillingProbe.GetPosition",
+      "FunctionSignature": "GGUStratig.DrillingProbe.GetPosition",
       "Id": "b133e7a2d55f45b0b61a07143f56601a",
       "Inputs": [
         {
           "Id": "fa093cee87b3491f8fedb25ae3dddabf",
           "Name": "drillingProbe",
-          "Description": "GGUStratic.DrillingProbe",
+          "Description": "GGUStratig.DrillingProbe",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -667,13 +667,13 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "GGUStratic.DrillingProbe.GetLayerInfo",
+      "FunctionSignature": "GGUStratig.DrillingProbe.GetLayerInfo",
       "Id": "b2202d5da80a4091bd9abd33690269bf",
       "Inputs": [
         {
           "Id": "4e47fd6488ce43cbb612fa243388f7c7",
           "Name": "drillingProbe",
-          "Description": "GGUStratic.DrillingProbe",
+          "Description": "GGUStratig.DrillingProbe",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -697,13 +697,13 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "GGUStratic.DrillingProbe.GetLayerDepth",
+      "FunctionSignature": "GGUStratig.DrillingProbe.GetLayerDepth",
       "Id": "188a7e3fafe04144a3c9f38a1132371f",
       "Inputs": [
         {
           "Id": "75a7c4d49b454bd1a9aa2ad521370d72",
           "Name": "drillingProbe",
-          "Description": "GGUStratic.DrillingProbe",
+          "Description": "GGUStratig.DrillingProbe",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1089,7 +1089,7 @@
   "Dependencies": [],
   "NodeLibraryDependencies": [
     {
-      "Name": "IL-SE-Dynamo",
+      "Name": "IlseDynamo",
       "Version": "0.1.0",
       "ReferenceType": "Package",
       "Nodes": [

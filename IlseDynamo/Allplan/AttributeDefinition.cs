@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Autodesk.DesignScript.Runtime;
 
+using Internal;
 using Allplan.Data;
 
 namespace Allplan
@@ -204,6 +205,37 @@ namespace Allplan
                 { "name", DefinitionCollection.AttributeDefinition.Select(a => a.Text).ToArray() },
                 { "datatype", DefinitionCollection.AttributeDefinition.Select(a => a.Datatype).ToArray() },
                 { "parentGroup", DefinitionCollection.AttributeDefinition.Select(a => a.ParentUserDirCode).ToArray() },
+            };
+        }
+
+        /// <summary>
+        /// Runs a validation on attribute definitions. Checks for unique names.
+        /// </summary>
+        /// <param name="ignoreCase">Whether being case sensitive</param>
+        /// <param name="trimStart">Trim whitespaces and separators at start</param>
+        /// <param name="trimEnd">Trim whitespaces and separators at end</param>
+        /// <returns></returns>
+        [MultiReturn("attributeName", "ifnr")]
+        public Dictionary<string, object> Validate(bool ignoreCase, bool trimStart = true, bool trimEnd = true)        
+        {
+            Func<Data.AttributeDefinition, string> nameUnifier = (d) =>
+            {
+                var key = ignoreCase ? d.Text.ToUpperInvariant() : d.Text;
+                if (trimStart)
+                    key = key.TrimStart(' ', '-', '_');
+                if (trimEnd)
+                    key = key.TrimEnd(' ', '-', '_');
+                return key;
+            };
+
+            var duplicates = DefinitionCollection.AttributeDefinition
+                .ToLookup(nameUnifier)
+                .Where(g => g.Count() > 1)
+                .SelectMany(g => g.Select(d => new Tuple<string, long>(d.Text, d.Ifnr)));
+            return new Dictionary<string, object>()
+            {
+                { "attributeName", duplicates.Select(t => t.Item1).ToArray() },
+                { "ifnr", duplicates.Select(t => t.Item2).ToArray() },
             };
         }
 

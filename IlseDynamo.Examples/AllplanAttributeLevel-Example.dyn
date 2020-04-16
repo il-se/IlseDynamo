@@ -41,8 +41,8 @@
     },
     {
       "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
-      "HintPath": "H:\\Workbench\\Dynamo\\Allplan\\AttributeDefinitionCollectionAllplan_de.xml",
-      "InputValue": "H:\\Workbench\\Dynamo\\Allplan\\AttributeDefinitionCollectionAllplan_de.xml",
+      "HintPath": "C:\\Workspace\\Git\\IlseDynamo\\IlseDynamo.Tests\\Resources\\AttributeDefinitionCollectionLocal_de.xml",
+      "InputValue": "..\\IlseDynamo.Tests\\Resources\\AttributeDefinitionCollectionLocal_de.xml",
       "NodeType": "ExtensionNode",
       "Id": "3a71f92adc6a40e5bc2a791736372267",
       "Inputs": [],
@@ -59,134 +59,6 @@
       ],
       "Replication": "Disabled",
       "Description": "Ermöglicht die Auswahl einer Datei auf dem System, um ihren Dateinamen abzurufen."
-    },
-    {
-      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
-      "HintPath": "H:\\Workbench\\Dynamo\\Allplan\\AttributeDefinitionCollectionLocal_de.xml",
-      "InputValue": "H:\\Workbench\\Dynamo\\Allplan\\AttributeDefinitionCollectionLocal_de.xml",
-      "NodeType": "ExtensionNode",
-      "Id": "4eba654cfe6a43d88820b3c2154955b4",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "1d32bc9831464f62ba5139fed0493f4f",
-          "Name": "",
-          "Description": "Filename",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "Ermöglicht die Auswahl einer Datei auf dem System, um ihren Dateinamen abzurufen."
-    },
-    {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Allplan.AttributeDefinition.ByFileName@string",
-      "Id": "b5e6fb2af54c40a7ab96bbba329b58df",
-      "Inputs": [
-        {
-          "Id": "e94c65c31a1246c1ac48c7e4a1f87437",
-          "Name": "fileName",
-          "Description": "The file name\n\nstring",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "bfe6da6f72884100b85bf8eccffa753a",
-          "Name": "AttributeDefinition",
-          "Description": "An attribute definition",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Auto",
-      "Description": "Reads a new attribute definition by file name.\n\nAttributeDefinition.ByFileName (fileName: string): AttributeDefinition"
-    },
-    {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Allplan.AttributeDefinition.Merge@Allplan.AttributeDefinition,Allplan.AttributeDefinition,Allplan.MergeStrategy",
-      "Id": "759736f50e154adab806c2fa3b6233bc",
-      "Inputs": [
-        {
-          "Id": "9301cc32d5ac4cb78cfee82d2ae22bc7",
-          "Name": "left",
-          "Description": "The left hand\n\nAttributeDefinition",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "6acbecd0340443199809cbe13f49e49a",
-          "Name": "right",
-          "Description": "The right hand\n\nAttributeDefinition",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "6312ab412adf4addb8c9a67d325be7b2",
-          "Name": "mergeStrategy",
-          "Description": "The strategy\n\nMergeStrategy",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "3bb800aa52594ed888d146244ecf6f4e",
-          "Name": "attributeDefintion",
-          "Description": "var",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        },
-        {
-          "Id": "62ef7bc425564f0eb6569e7c5fcf6583",
-          "Name": "report",
-          "Description": "var",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Auto",
-      "Description": "Runs a merge on two given collections using a given strategy.\n\nAttributeDefinition.Merge (left: AttributeDefinition, right: AttributeDefinition, mergeStrategy: MergeStrategy): var[]..[]"
-    },
-    {
-      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
-      "NodeType": "FunctionNode",
-      "FunctionSignature": "Allplan.MergeStrategy.ThrowExceptionOnFirst",
-      "Id": "76b3ed288c4947fc96e202daec094c6d",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "55a80a7b42494df58804da91752e24e4",
-          "Name": "MergeStrategy",
-          "Description": "MergeStrategy",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Auto",
-      "Description": "Throw an exception if definitions don't match. The merge node will get a warning.\n\nMergeStrategy.ThrowExceptionOnFirst: MergeStrategy"
     },
     {
       "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
@@ -212,13 +84,22 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "Allplan.AttributeFavourite.ByFileName@string",
+      "FunctionSignature": "Allplan.AttributeFavourite.ByFileName@string,string",
       "Id": "0650643a6cde4a4db2fed304cb447aa2",
       "Inputs": [
         {
           "Id": "0371d30327424b40891cd5d4072670d7",
           "Name": "fileName",
           "Description": "The file name\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6c67cfccf6bb42e4a55b61cd5b69817e",
+          "Name": "basePath",
+          "Description": "If given, a save will keep folder hierarchy the same as input hierarchy\n\nstring",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -237,7 +118,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Imports an Allplan Favourite file.\n\nAttributeFavourite.ByFileName (fileName: string): AttributeFavourite"
+      "Description": "Imports an Allplan Favourite file.\n\nAttributeFavourite.ByFileName (fileName: string, basePath: string): AttributeFavourite"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -257,7 +138,7 @@
         {
           "Id": "ad6d1e94c3e8432ba5d4082f0811746e",
           "Name": "attributeLevel",
-          "Description": "AttributeLevel",
+          "Description": "The required minium level\n\nAttributeLevel",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -266,7 +147,7 @@
         {
           "Id": "abf032b87ea94826957fad97090d948a",
           "Name": "attributeDefinition",
-          "Description": "AttributeDefinition",
+          "Description": "The attribute definition\n\nAttributeDefinition",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -277,7 +158,7 @@
         {
           "Id": "770692479d89460ebd7802e011be8566",
           "Name": "AttributeFavourite",
-          "Description": "AttributeFavourite",
+          "Description": "A new favourite",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -285,7 +166,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "AttributeFavourite.OfLevel (attributeLevel: AttributeLevel, attributeDefinition: AttributeDefinition): AttributeFavourite"
+      "Description": "Creates a new favourite by given LOI and definition.\n\nAttributeFavourite.OfLevel (attributeLevel: AttributeLevel, attributeDefinition: AttributeDefinition): AttributeFavourite"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -349,12 +230,12 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
       "NodeType": "CodeBlockNode",
-      "Code": "[\"Umbaukategorie\",\"Betonstahl\", \"Regelwerk\"];",
+      "Code": "[\"Schutzwandbauteil\",\"Schalldaemmung\", \"Datenquelle\"];",
       "Id": "a6db8fe28c4647009d98d2d21a2c6eea",
       "Inputs": [],
       "Outputs": [
         {
-          "Id": "d810e2621a4f4779bd0345295f71821f",
+          "Id": "0e44530a0eb34f18b8e154dac0391def",
           "Name": "",
           "Description": "Wert des Ausdrucks in Zeile 1",
           "UsingDefaultValue": false,
@@ -384,7 +265,7 @@
         {
           "Id": "026049357d2d4256aee1a11fc990948a",
           "Name": "level",
-          "Description": "int",
+          "Description": "The maximum level\n\nint",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -395,7 +276,7 @@
         {
           "Id": "be1f61ca2f954e2cb0162daf0f3356d6",
           "Name": "AttributeLevel",
-          "Description": "AttributeLevel",
+          "Description": "A custom attribute level aggregating all lower levels",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -403,7 +284,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "AttributeMatrix.AllUpToLevel (level: int): AttributeLevel"
+      "Description": "Cumulative level creation.\n\nAttributeMatrix.AllUpToLevel (level: int): AttributeLevel"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
@@ -565,6 +446,15 @@
           "Level": 2,
           "UseLevels": false,
           "KeepListStructure": false
+        },
+        {
+          "Id": "b9ebc6f374ae4ec28f8c566f6c9d602c",
+          "Name": "unknown",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
         }
       ],
       "Replication": "Auto",
@@ -627,43 +517,43 @@
       ],
       "Replication": "Disabled",
       "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"\";",
+      "Id": "d67123db84bd48b09aca3da81c6b0c96",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "56def4a9adad44069dbb21f26f32a48d",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Ermöglicht die direkte Erstellung von DesignScript-Code."
     }
   ],
   "Connectors": [
     {
       "Start": "8ae64c8b79b749a6b72efde37b4d8632",
-      "End": "9301cc32d5ac4cb78cfee82d2ae22bc7",
-      "Id": "41c1146343b646fa83a100f5e19ca625"
+      "End": "abf032b87ea94826957fad97090d948a",
+      "Id": "f326bafa5eec410e9c3edbd64ea2bc89"
+    },
+    {
+      "Start": "8ae64c8b79b749a6b72efde37b4d8632",
+      "End": "ca1e2d5ecf8c4ab7955c8bb272bd5c89",
+      "Id": "ccdd5f489349487f99fdddb9f524e8cf"
     },
     {
       "Start": "0b34dfc0c46242a69b452292b77c9181",
       "End": "a7913c03ba504406b3a46988cd818dde",
       "Id": "30cc40760847454dbe486a058bf0ac2e"
-    },
-    {
-      "Start": "1d32bc9831464f62ba5139fed0493f4f",
-      "End": "e94c65c31a1246c1ac48c7e4a1f87437",
-      "Id": "468cf0a4c2974e488d5ef8d9d815a2d6"
-    },
-    {
-      "Start": "bfe6da6f72884100b85bf8eccffa753a",
-      "End": "6acbecd0340443199809cbe13f49e49a",
-      "Id": "29693a48e24a4cc19cb0b43946a07462"
-    },
-    {
-      "Start": "3bb800aa52594ed888d146244ecf6f4e",
-      "End": "abf032b87ea94826957fad97090d948a",
-      "Id": "4a540c3e7c194119b07224aba55468e7"
-    },
-    {
-      "Start": "3bb800aa52594ed888d146244ecf6f4e",
-      "End": "ca1e2d5ecf8c4ab7955c8bb272bd5c89",
-      "Id": "0dd7c92a31004e5aaa1da3556412e5e5"
-    },
-    {
-      "Start": "55a80a7b42494df58804da91752e24e4",
-      "End": "6312ab412adf4addb8c9a67d325be7b2",
-      "Id": "6468e80d642d4cb3957597f6f72271a1"
     },
     {
       "Start": "b4f0fb6ef43645f186e7f7a0910f96b1",
@@ -693,17 +583,17 @@
     {
       "Start": "13efe10f4c36411fa2dbcd1f09288396",
       "End": "9385804379ec4cf2a3081acde552fca6",
-      "Id": "7a08443f8e4147fcb8b266b72d2b5de7"
+      "Id": "0aae9c615cb74db1ba85cb0186aa88f1"
     },
     {
-      "Start": "d810e2621a4f4779bd0345295f71821f",
+      "Start": "0e44530a0eb34f18b8e154dac0391def",
       "End": "e3da21d0997d495688fa8a328e156d0b",
-      "Id": "9f0a99f3b7f34b20a4e42223d84a927b"
+      "Id": "4d79fa8efb534e2182ec46aab192efcb"
     },
     {
       "Start": "be1f61ca2f954e2cb0162daf0f3356d6",
       "End": "ad6d1e94c3e8432ba5d4082f0811746e",
-      "Id": "4e5fdb4d9f4f444ab98a37903d76cb37"
+      "Id": "eb21a74193264578bc03661d2f41c492"
     },
     {
       "Start": "b7aa80b6df8d4d90b8a0789b066a6e98",
@@ -729,19 +619,21 @@
       "Start": "b7636d35b36c444986adf04cb4287ba9",
       "End": "e17a799ee14b4e3ca86d29ab16c175bf",
       "Id": "1981dc2cbbc64326a2433761519fe917"
+    },
+    {
+      "Start": "56def4a9adad44069dbb21f26f32a48d",
+      "End": "6c67cfccf6bb42e4a55b61cd5b69817e",
+      "Id": "ac0304870ada4f25898af7f580d63cfd"
     }
   ],
   "Dependencies": [],
   "NodeLibraryDependencies": [
     {
-      "Name": "IL-SE-Dynamo",
+      "Name": "IlseDynamo",
       "Version": "0.1.0",
       "ReferenceType": "Package",
       "Nodes": [
         "de696f61142c431ba51b7e07c953c90c",
-        "b5e6fb2af54c40a7ab96bbba329b58df",
-        "759736f50e154adab806c2fa3b6233bc",
-        "76b3ed288c4947fc96e202daec094c6d",
         "0650643a6cde4a4db2fed304cb447aa2",
         "f893b6998be94dd9bea007af44341800",
         "4f5e62a1472c49739a2d0f3e648c775d",
@@ -781,8 +673,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 356.32578651165977,
-        "Y": 153.96976574756775
+        "X": 313.23982730750845,
+        "Y": 364.61223296786142
       },
       {
         "ShowGeometry": true,
@@ -791,48 +683,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -207.44042057373474,
-        "Y": 151.37677000174895
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "File Path",
-        "Id": "4eba654cfe6a43d88820b3c2154955b4",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": -207.69697139247603,
-        "Y": 262.47812361421848
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "AttributeDefinition.ByFileName",
-        "Id": "b5e6fb2af54c40a7ab96bbba329b58df",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 353.85246219672717,
-        "Y": 261.86427705456
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "AttributeDefinition.Merge",
-        "Id": "759736f50e154adab806c2fa3b6233bc",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 727.67824786272,
-        "Y": 223.12658508511856
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "MergeStrategy.ThrowExceptionOnFirst",
-        "Id": "76b3ed288c4947fc96e202daec094c6d",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 353.35487288939987,
-        "Y": 371.91882783825213
+        "X": -137.22626483363695,
+        "Y": 362.01923722204265
       },
       {
         "ShowGeometry": true,
@@ -841,8 +693,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -201.88134751078269,
-        "Y": 24.200560296463294
+        "X": -131.66719177068489,
+        "Y": 234.84302751675696
       },
       {
         "ShowGeometry": true,
@@ -851,8 +703,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 361.82969531215144,
-        "Y": 34.287999231558615
+        "X": 315.55218357435956,
+        "Y": 235.3558088509298
       },
       {
         "ShowGeometry": true,
@@ -861,8 +713,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1261.6433594326102,
-        "Y": 425.44027281803307
+        "X": 900.356912614656,
+        "Y": 391.97968921619832
       },
       {
         "ShowGeometry": true,
@@ -871,8 +723,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 250.45692386366579,
-        "Y": 789.49843892561012
+        "X": 11.472208451853021,
+        "Y": 540.21717511077031
       },
       {
         "ShowGeometry": true,
@@ -881,8 +733,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -199.67776816218361,
-        "Y": 795.20880711351708
+        "X": -133.86921661129873,
+        "Y": 541.14021449821576
       },
       {
         "ShowGeometry": true,
@@ -891,8 +743,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -191.67132676567667,
-        "Y": 893.03781034527947
+        "X": -133.84165654889364,
+        "Y": 670.88474306638659
       },
       {
         "ShowGeometry": true,
@@ -901,8 +753,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 589.59426321128058,
-        "Y": 594.2692992960616
+        "X": 481.46320167874137,
+        "Y": 541.26851630013175
       },
       {
         "ShowGeometry": true,
@@ -911,8 +763,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 410.93239531424967,
-        "Y": 591.40806826404867
+        "X": 371.41971325498787,
+        "Y": 670.85671541421254
       },
       {
         "ShowGeometry": true,
@@ -921,8 +773,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1746.0122077076478,
-        "Y": 432.21349655618519
+        "X": 1273.3022060306068,
+        "Y": 561.8159732775996
       },
       {
         "ShowGeometry": true,
@@ -931,8 +783,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2358.2233869216752,
-        "Y": 350.18797565751765
+        "X": 1593.8627291818023,
+        "Y": 557.51781108499074
       },
       {
         "ShowGeometry": true,
@@ -941,8 +793,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2514.49078818054,
-        "Y": 352.03946048012153
+        "X": 1733.2327748172072,
+        "Y": 557.24375743799146
       },
       {
         "ShowGeometry": true,
@@ -951,8 +803,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1748.9731653729475,
-        "Y": 211.77081394611125
+        "X": 1265.8458888014552,
+        "Y": 199.09823805419768
       },
       {
         "ShowGeometry": true,
@@ -961,8 +813,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2353.4935175504247,
-        "Y": -28.932684111082551
+        "X": 1593.3224913011843,
+        "Y": 200.06285653603294
       },
       {
         "ShowGeometry": true,
@@ -971,14 +823,24 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 2574.6617228067353,
-        "Y": -25.917130121289347
+        "X": 1830.5960598475233,
+        "Y": 202.72300360578708
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "d67123db84bd48b09aca3da81c6b0c96",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 221.94595765827205,
+        "Y": 279.68976770063648
       }
     ],
     "Annotations": [
       {
         "Id": "9fd00f31c7354c0c8b8751c15f67e262",
-        "Title": "LOI Definition",
+        "Title": "Example LoI definition of 3 levels",
         "Nodes": [
           "4f5e62a1472c49739a2d0f3e648c775d",
           "056fc71b1c5e4c0abec7d996ef1e2f88",
@@ -986,13 +848,13 @@
           "0eb1fe948524446db2346d6c32d02064",
           "6564d96420414cfbb3c33e1460aa2a8b"
         ],
-        "Left": -209.67776816218361,
-        "Top": 538.20806826404862,
-        "Width": 1104.4720313734642,
-        "Height": 447.42974208123087,
+        "Left": -143.86921661129873,
+        "Top": 487.01717511077032,
+        "Width": 930.53241829004014,
+        "Height": 276.46756795561623,
         "FontSize": 36.0,
-        "InitialTop": 591.40806826404867,
-        "InitialHeight": 424.22974208123082,
+        "InitialTop": 540.21717511077031,
+        "InitialHeight": 446.6297420812308,
         "TextblockHeight": 43.2,
         "Background": "#FFC1D676"
       },
@@ -1002,26 +864,22 @@
         "Nodes": [
           "de696f61142c431ba51b7e07c953c90c",
           "3a71f92adc6a40e5bc2a791736372267",
-          "4eba654cfe6a43d88820b3c2154955b4",
-          "b5e6fb2af54c40a7ab96bbba329b58df",
-          "759736f50e154adab806c2fa3b6233bc",
-          "76b3ed288c4947fc96e202daec094c6d",
           "13deac819c42461092d24e49eee0c521",
           "0650643a6cde4a4db2fed304cb447aa2"
         ],
-        "Left": -217.69697139247603,
-        "Top": -28.999439703536709,
-        "Width": 1271.375219255196,
-        "Height": 493.51826754178887,
+        "Left": -147.22626483363695,
+        "Top": 181.64302751675694,
+        "Width": 757.57844840799658,
+        "Height": 275.56920545110449,
         "FontSize": 36.0,
-        "InitialTop": 24.200560296463294,
-        "InitialHeight": 470.31826754178883,
+        "InitialTop": 234.84302751675696,
+        "InitialHeight": 492.7182675417888,
         "TextblockHeight": 43.2,
         "Background": "#FFC1D676"
       }
     ],
-    "X": 190.86426698128048,
-    "Y": 84.824881182471756,
-    "Zoom": 0.28087505471164687
+    "X": 113.8268075536991,
+    "Y": -15.958270934820547,
+    "Zoom": 0.58189789816732929
   }
 }

@@ -5,7 +5,7 @@ using Autodesk.DesignScript.Geometry;
 
 using GGUStratic.Data;
 
-namespace GGUStratic
+namespace GGUStratig
 {
     /// <summary>
     /// Wrap GGU stratic soil layer / probes export files.

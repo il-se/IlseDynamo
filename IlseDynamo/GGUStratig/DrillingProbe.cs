@@ -7,7 +7,7 @@ using Autodesk.DesignScript.Geometry;
 
 using GGUStratic.Data;
 
-namespace GGUStratic
+namespace GGUStratig
 {
     /// <summary>
     /// The descriptive data of a drilling record.

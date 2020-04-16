@@ -64,7 +64,9 @@ namespace Allplan
         /// <returns></returns>
         public static AttributeMatrix ByData(object[][] levelAndAttribute)
         {
-            return ByData(levelAndAttribute.Select(r => new Tuple<int, string>(int.Parse(r[0].ToString()), r[1].ToString())));
+            return ByData(levelAndAttribute
+                .Where(r => r?.Length > 0)
+                .Select(r => new Tuple<int, string>(int.Parse(r[0].ToString()), r[1].ToString())));
         }
 
         /// <summary>
@@ -76,7 +78,7 @@ namespace Allplan
         {
             var matrix = new AttributeMatrix();
             foreach (var level in levelAndAttribute
-                .ToLookup(t => t.Item1, t => t.Item2)
+                .ToLookup(t => t.Item1, t => t.Item2.Trim())
                 .Select(g => new AttributeLevel { Level = g.Key, Attributes = g.ToArray() }))
             {
                 matrix.AttributeLevels[level.Level] = level;
@@ -92,7 +94,9 @@ namespace Allplan
         /// <returns>A new matrix</returns>
         public static AttributeMatrix ByData(int[] levels, string[] attributeNames)
         {
-            return ByData(Enumerable.Range(0, Math.Min(levels.Length, attributeNames.Length)).Select(i => new Tuple<int, string>(levels[i], attributeNames[i])));
+            return ByData(
+                Enumerable.Range(0, 
+                    Math.Min(levels?.Length ?? 0, attributeNames?.Length ?? 0)).Select(i => new Tuple<int, string>(levels[i], attributeNames[i])));
         }
     }
 }

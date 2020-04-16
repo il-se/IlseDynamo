@@ -21,7 +21,7 @@ namespace Allplan
 
         private string FileName { get; set; }
         private string BasePath { get; set; }
-        private AllplanAttributesContainer AttributeContainer { get; set; }
+        private AllplanAttributesContainer Favourite { get; set; }
 
         internal AttributeFavourite()
         {
@@ -41,7 +41,7 @@ namespace Allplan
             {
                 FileName = fileName,
                 BasePath = basePath,
-                AttributeContainer = AllplanAttributesContainer.ReadFrom(fileName)
+                Favourite = AllplanAttributesContainer.ReadFrom(fileName)
             };
         }
 
@@ -87,7 +87,7 @@ namespace Allplan
             if (!dirInfo.Exists)
                 throw new Exception($"Path {dirInfo.FullName} isn't existing.");
 
-            AttributeContainer.WriteTo(finalFilePath);
+            Favourite.WriteTo(finalFilePath);
             return finalFilePath;
         }
 
@@ -110,7 +110,7 @@ namespace Allplan
             var nameSet = new HashSet<string>(names);
             var ifNrSet = attributeDefinition.DefinitionCollection
                 .AttributeDefinition
-                .Where(a => nameSet.Contains(a.Text))
+                .Where(a => nameSet.Contains(a.Text.Trim()))
                 .Select(a => a.Ifnr)
                 .ToArray();
 
@@ -118,7 +118,7 @@ namespace Allplan
             {
                 BasePath = BasePath,
                 FileName = FileName,
-                AttributeContainer = AttributeContainer?.ExcludeByIfNr(ifNrSet)
+                Favourite = Favourite?.ExcludeByIfNr(ifNrSet)
             };
         }
 
@@ -130,14 +130,14 @@ namespace Allplan
         /// <returns>A new favourite</returns>
         public static AttributeFavourite ByLevel(AttributeLevel attributeLevel, AttributeDefinition attributeDefinition)
         {
-            var nameSet = new HashSet<string>(attributeLevel.Attributes);
+            var nameSet = attributeLevel.Attributes.ToSet(false);
             return new AttributeFavourite
             {
                 FileName = $"{attributeLevel.Level}",
-                AttributeContainer = AllplanAttributesContainer.Create(
+                Favourite = AllplanAttributesContainer.Create(
                     attributeDefinition.DefinitionCollection
                     .AttributeDefinition
-                    .Where(a => nameSet.Contains(a.Text)), "2019")
+                    .Where(a => nameSet.Contains(a.Text.Trim())), "2019")
             };
         }
 
@@ -149,9 +149,9 @@ namespace Allplan
         /// <returns>A new favourite</returns>
         public AttributeFavourite OfLevel(AttributeLevel attributeLevel, AttributeDefinition attributeDefinition)
         {
-            var nameSet = new HashSet<string>(attributeLevel.Attributes);
+            var nameSet = attributeLevel.Attributes.ToSet(false);
             var ifnrSet = attributeDefinition.DefinitionCollection.AttributeDefinition
-                .Where(a => nameSet.Contains(a.Text))
+                .Where(a => nameSet.Contains(a.Text.Trim()))
                 .Select(a => a.Ifnr)
                 .ToArray();
 
@@ -159,7 +159,7 @@ namespace Allplan
             {
                 FileName = $"{Path.GetDirectoryName(FileName)}{Path.DirectorySeparatorChar}{Name}_{attributeLevel.Level}{EXTENSION}",
                 BasePath = BasePath,
-                AttributeContainer = AttributeContainer.FilterByIfNr(ifnrSet)
+                Favourite = Favourite.FilterByIfNr(ifnrSet)
             };
         }
 
@@ -174,7 +174,7 @@ namespace Allplan
             {
                 FileName = FileName,
                 BasePath = BasePath,
-                AttributeContainer = AttributeContainer?.ExcludeByIfNr(ifnr)
+                Favourite = Favourite?.ExcludeByIfNr(ifnr)
             };
         }
 
@@ -185,9 +185,9 @@ namespace Allplan
                 .AttributeDefinition
                 .ToDictionary(a => a.Ifnr);
 
-            return AttributeContainer?.AttributeSet
+            return Favourite?.AttributeSet
                 .Attributes
-                .Select(a => new Tuple<string, string>(ifnrMap[a.Ifnr]?.Text, a.Value));
+                .Select(a => new Tuple<string, string>(ifnrMap[a.Ifnr]?.Text.Trim(), a.Value));
         }
 
         /// <summary>
@@ -205,16 +205,16 @@ namespace Allplan
 
             return new Dictionary<string, object>()
             {
-                { "name", AttributeContainer?
+                { "name", Favourite?
                         .AttributeSet
                         .Attributes
                         .Where(a => ifnrMap.ContainsKey(a.Ifnr))
-                        .Select(a => ifnrMap[a.Ifnr]?.Text ?? $"{a.Ifnr}") },
-                { "value", AttributeContainer?
+                        .Select(a => ifnrMap[a.Ifnr]?.Text.Trim() ?? $"{a.Ifnr}") },
+                { "value", Favourite?
                         .AttributeSet
                         .Attributes
                         .Select(a => a.Value) },
-                { "unknown", AttributeContainer?
+                { "unknown", Favourite?
                         .AttributeSet
                         .Attributes
                         .Where(a => !ifnrMap.ContainsKey(a.Ifnr))
@@ -231,8 +231,8 @@ namespace Allplan
         {
             return new Dictionary<string, object>()
             {
-                { "ifnr", AttributeContainer?.AttributeSet.Attributes.Select(a => a.Ifnr) },
-                { "value", AttributeContainer?.AttributeSet.Attributes.Select(a => a.Value) }
+                { "ifnr", Favourite?.AttributeSet.Attributes.Select(a => a.Ifnr) },
+                { "value", Favourite?.AttributeSet.Attributes.Select(a => a.Value) }
             };
         }
 
@@ -258,11 +258,11 @@ namespace Allplan
                 .ToDictionary(a => a.Ifnr);
 
             return attributeFavourites
-                .SelectMany(af => af.AttributeContainer
+                .SelectMany(af => af.Favourite
                     .AttributeSet
                     .Attributes
                     .Where(a => Array.BinarySearch(blackListIfNr, a.Ifnr) < 0) // Only those which are not in the blacklist
-                    .Select(a => ifnrMap[a.Ifnr]?.Text))
+                    .Select(a => ifnrMap[a.Ifnr]?.Text.Trim()))
                 .Where(n => !string.IsNullOrEmpty(n))
                 .Distinct()
                 .ToArray();
@@ -337,7 +337,7 @@ namespace Allplan
         /// <returns>String representation</returns>
         public override string ToString()
         {
-            return $"{Name} ({AttributeContainer.Version}) ({AttributeContainer.AttributeSet.Attributes.Count})";
+            return $"{Name} ({Favourite.Version}) ({Favourite.AttributeSet.Attributes.Count})";
         }
     }
 }
