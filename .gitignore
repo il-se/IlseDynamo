@@ -331,3 +331,4 @@ ASALocalRun/
 
 /IlseDynamo.Examples/out
 local.*
+/DeployedPackages/

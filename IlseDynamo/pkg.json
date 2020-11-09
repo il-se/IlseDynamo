@@ -2,12 +2,12 @@
   "license": "Apache-2.0",
   "file_hash": null,
   "name": "IlseDynamo",
-  "version": "0.1.0",
+  "version": "0.99.0.0",
   "description": "ILSE Dynamo",
   "group": "ILSE",
-  "keywords": [ "Allplan", "GGU" ],
+  "keywords": [ "Allplan", "GGUStratig" ],
   "dependencies": [],
-  "contents": "ILSE workflows",
+  "contents": "ILse Dynamo Workflows",
   "engine_version": "2.5.0.7186",
   "engine": "dynamo",
   "engine_metadata": "",
@@ -15,6 +15,6 @@
   "repository_url": "https://www.github.com/il-se/IlseDynamo",
   "contains_binaries": true,
   "node_libraries": [
-    "IlseDynamo, Version=0.1.0, Culture=neutral, PublicKeyToken=null"
+    "IlseDynamo, Version=0.99.0.0, Culture=neutral, PublicKeyToken=null"
   ]
 }
