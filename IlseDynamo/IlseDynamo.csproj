@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net47</TargetFrameworks>
+    <TargetFrameworks>net48</TargetFrameworks>
     <LanguageTargets>$(MSBuildToolsPath)\Microsoft.CSharp.targets</LanguageTargets>
     <Title>IlseDynamo Custom Nodes</Title>
     <OutputType>Library</OutputType>
@@ -12,7 +12,7 @@
     <Platform Condition=" '$(Platform)' == '' ">Any CPU</Platform>
 
     <DeployDynamoProjectName>ILse</DeployDynamoProjectName>
-    <DeployDynamoVersion>2.6</DeployDynamoVersion>
+    <DeployDynamoVersion>2.12</DeployDynamoVersion>
     <DeployDynamoPath>$(AppData)\Dynamo\Dynamo Core\$(DeployDynamoVersion)\packages</DeployDynamoPath>
 
     <AssemblyName>IlseDynamo</AssemblyName>
@@ -26,6 +26,8 @@
     <BuildRelease>0</BuildRelease>
     <BuildQualifier></BuildQualifier>
     <Build>0</Build>
+
+    <RootNamespace>IlseDynamo</RootNamespace>
 
     <Configurations>Debug;Release;Beta</Configurations>
     <LangVersion>8.0</LangVersion>
@@ -101,9 +103,14 @@
 
   <ItemGroup>
     <PackageReference Include="DynamoVisualProgramming.Core">
-      <Version>2.6.1.8786</Version>
+      <Version>2.12.0.5650</Version>
     </PackageReference>
-    <PackageReference Include="System.Collections.Immutable" Version="1.7.0" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.7.1" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\IlseDynamo.Data\IlseDynamo.Data.csproj" />
   </ItemGroup>
 
 
@@ -129,6 +136,9 @@
 
 
   <ItemGroup>
+    <None Update="IlseDynamo_DynamoCustomization.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="pkg.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

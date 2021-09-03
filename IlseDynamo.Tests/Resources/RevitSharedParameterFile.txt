@@ -1,0 +1,25 @@
+# This is a Revit shared parameter file.												
+# Do not edit manually.												
+*META	VERSION	MINVERSION										
+META	2	1										
+*GROUP	ID	NAME										
+GROUP	1	LOI 100										
+GROUP	2	LOI 200										
+GROUP	3	LOI 300										
+GROUP	4	LOI 400										
+GROUP	5	LOI 500										
+GROUP	6	LOI ohne										
+*PARAM	GUID	NAME	DATATYPE	DATACATEGORY	GROUP	VISIBLE	DESCRIPTION	USERMODIFIABLE				
+PARAM	428d2d01-3f9a-4251-9b07-46294ede9a17	_Amt	TEXT		5	1		1				
+PARAM	84bd140a-1d29-4b34-8868-ca6f34643a11	_Anzahl Teilbauwerke	TEXT		1	1		1				
+PARAM	ebcb9d1d-15c6-4d2e-a1ef-dc7252c71e2d	_Bauwerksname	TEXT		1	1		1				
+PARAM	5f7c821e-8b04-4bd9-9337-03e3fd5d2209	_Bauwerksnummer	TEXT		2	1		1				
+PARAM	0d3bd87d-fe1c-48f7-bcb9-213d89521f1d	_Bemerkungen zu B.01_Bauwerke	TEXT		1	1		1				
+PARAM	5c5c9b59-166a-4b0d-b54b-092bc517271b	_Gesamtlaenge fuer Bruecken	TEXT		5	1		1				
+PARAM	4cafc159-c944-4887-8141-88861fb35d64	_Gesamtlaenge fuer Laermschutzbauwerke	TEXT		5	1		1				
+PARAM	de4ae459-f5ca-4585-8d59-e207a22c3444	_Gesamtlaenge fuer Stuetzbauwerke	TEXT		5	1		1				
+PARAM	edbc795a-06f9-4957-9e5f-4e8c5012c47f	_Gesamtlaenge fuer Tunnel/Trogbauwerke	TEXT		5	1		1				
+PARAM	9fa9b472-c3f2-41eb-ac00-ccbd0beb947f	_interne Bauwerksnummer	TEXT		1	1		1				
+PARAM	c3a2ee73-9a2e-4b2b-96f3-84a7c90f5a1c	_interner Sortierschluessel	TEXT		6	1		1				
+PARAM	68a10399-4411-4a43-bc1d-81b4a344dbc3	_Naechstgelegener Ort	TEXT		5	1		1				
+PARAM	d12e99ed-e1a1-4ac1-8fb5-7ae66b060e31	_Verwaltung/Gemarkung	TEXT		5	1		1				

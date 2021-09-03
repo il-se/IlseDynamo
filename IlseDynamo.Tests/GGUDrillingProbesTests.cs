@@ -6,7 +6,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System.Globalization;
 
-namespace GGUStratic
+using IlseDynamo.Data.GGU;
+
+namespace IlseDynamo.GGUStratic
 {
     [TestClass]
     public class GGUDrillingProbesTests

@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>IlseDynamo.Data</AssemblyName>
+    <Authors>IL-SE</Authors>
+    <Company>INROS LACKNER SE</Company>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+
+    <TargetFrameworks>net48;net5.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="GGU\" />
+  </ItemGroup>
+
+</Project>

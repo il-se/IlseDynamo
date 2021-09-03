@@ -4,16 +4,17 @@ using System.Linq;
 using System.Collections.Generic;
 
 using Internal;
-using Allplan.Data;
+
+using IlseDynamo.Data.Allplan;
 
 using Autodesk.DesignScript.Runtime;
 
-namespace Allplan
+namespace IlseDynamo.Allplan
 {
     /// <summary>
     /// Node mapping for an Allplan Attribite Favourite (*.atfanfx).
     /// </summary>
-    public class AttributeFavourite
+    public class AttributeFavourites
     {
         #region Internal
 
@@ -23,7 +24,7 @@ namespace Allplan
         private string BasePath { get; set; }
         private AllplanAttributesContainer Favourite { get; set; }
 
-        internal AttributeFavourite()
+        internal AttributeFavourites()
         {
         }
 
@@ -35,13 +36,47 @@ namespace Allplan
         /// <param name="fileName">The file name</param>
         /// <param name="basePath">If given, a save will keep folder hierarchy the same as input hierarchy</param>
         /// <returns>A favourite</returns>
-        public static AttributeFavourite ByFileName(string fileName, string basePath = null)
+        public static AttributeFavourites ByFileName(string fileName, string basePath = null)
         {
-            return new AttributeFavourite
+            return new AttributeFavourites
             {
                 FileName = fileName,
                 BasePath = basePath,
                 Favourite = AllplanAttributesContainer.ReadFrom(fileName)
+            };
+        }
+
+        /// <summary>
+        /// Create a new favourite by names from given attribute definition.
+        /// </summary>
+        /// <param name="attributeNames">The names</param>
+        /// <param name="attributes">The attribute definition</param>
+        /// <param name="caseInsensitive">Case insensitive (false by default)</param>
+        /// <returns>The favourite from matches and missing names by definition</returns>
+        [MultiReturn("favourite", "missing")]
+        public static Dictionary<string, object> ByAttributeNames(string[] attributeNames, Attributes attributes, bool caseInsensitive = false)
+        {
+            var matches = attributeNames.Select(name =>
+                (name, attributes.AttributeCollection.AttributeDefinition.Find(a => 0 == string.Compare(a.Name, name, caseInsensitive))))
+                .ToArray();
+
+            return new Dictionary<string, object>()
+            {
+                { "favourite", new AttributeFavourites
+                    { 
+                        Favourite = new AllplanAttributesContainer
+                        {
+                            AttributeSet = new AllplanAttributeSet
+                            {
+                                Attributes = matches
+                                    .Where(m => m.Item2 != null)
+                                    .Select(m => new AllplanAttribute{ Ifnr = m.Item2.Ifnr, Suffix = m.Item2.Datatype })
+                                    .ToList()
+                            }
+                        }
+                    } 
+                },
+                { "missing", matches.Where(m => m.Item2 == null).Select(m => m.name).ToArray() }
             };
         }
 
@@ -105,16 +140,16 @@ namespace Allplan
         /// <param name="names">The attribute names.</param>
         /// <param name="attributeDefinition">The definition to resolve IFNR against</param>
         /// <returns>A new favourite</returns>
-        public AttributeFavourite Exclude(string[] names, AttributeDefinition attributeDefinition)
+        public AttributeFavourites Exclude(string[] names, Attributes attributeDefinition)
         {
             var nameSet = new HashSet<string>(names);
-            var ifNrSet = attributeDefinition.DefinitionCollection
+            var ifNrSet = attributeDefinition.AttributeCollection
                 .AttributeDefinition
                 .Where(a => nameSet.Contains(a.Text.Trim()))
                 .Select(a => a.Ifnr)
                 .ToArray();
 
-            return new AttributeFavourite
+            return new AttributeFavourites
             {
                 BasePath = BasePath,
                 FileName = FileName,
@@ -128,14 +163,14 @@ namespace Allplan
         /// <param name="attributeLevel">The LOI</param>
         /// <param name="attributeDefinition">The attribute definition</param>
         /// <returns>A new favourite</returns>
-        public static AttributeFavourite ByLevel(AttributeLevel attributeLevel, AttributeDefinition attributeDefinition)
+        public static AttributeFavourites ByLevel(AttributeLevels attributeLevel, Attributes attributeDefinition)
         {
             var nameSet = attributeLevel.Attributes.ToSet(false);
-            return new AttributeFavourite
+            return new AttributeFavourites
             {
                 FileName = $"{attributeLevel.Level}",
                 Favourite = AllplanAttributesContainer.Create(
-                    attributeDefinition.DefinitionCollection
+                    attributeDefinition.AttributeCollection
                     .AttributeDefinition
                     .Where(a => nameSet.Contains(a.Text.Trim())), "2019")
             };
@@ -147,15 +182,15 @@ namespace Allplan
         /// <param name="attributeLevel">The required minium level</param>
         /// <param name="attributeDefinition">The attribute definition</param>
         /// <returns>A new favourite</returns>
-        public AttributeFavourite OfLevel(AttributeLevel attributeLevel, AttributeDefinition attributeDefinition)
+        public AttributeFavourites OfLevel(AttributeLevels attributeLevel, Attributes attributeDefinition)
         {
             var nameSet = attributeLevel.Attributes.ToSet(false);
-            var ifnrSet = attributeDefinition.DefinitionCollection.AttributeDefinition
+            var ifnrSet = attributeDefinition.AttributeCollection.AttributeDefinition
                 .Where(a => nameSet.Contains(a.Text.Trim()))
                 .Select(a => a.Ifnr)
                 .ToArray();
 
-            return new AttributeFavourite
+            return new AttributeFavourites
             {
                 FileName = $"{Path.GetDirectoryName(FileName)}{Path.DirectorySeparatorChar}{Name}_{attributeLevel.Level}{EXTENSION}",
                 BasePath = BasePath,
@@ -168,9 +203,9 @@ namespace Allplan
         /// </summary>
         /// <param name="ifnr">The attribute IFNRs.</param>
         /// <returns>A new favourite</returns>
-        public AttributeFavourite Exclude(long[] ifnr)
+        public AttributeFavourites Exclude(long[] ifnr)
         {
-            return new AttributeFavourite
+            return new AttributeFavourites
             {
                 FileName = FileName,
                 BasePath = BasePath,
@@ -178,10 +213,10 @@ namespace Allplan
             };
         }
 
-        internal IEnumerable<Tuple<string, string>> ToAttributeValue(AttributeDefinition attributeDefinition)
+        internal IEnumerable<Tuple<string, string>> ToAttributeValue(Attributes attributeDefinition)
         {
             var ifnrMap = attributeDefinition
-                .DefinitionCollection
+                .AttributeCollection
                 .AttributeDefinition
                 .ToDictionary(a => a.Ifnr);
 
@@ -196,10 +231,10 @@ namespace Allplan
         /// <param name="attributeDefinition">The definition to resolve IFNR against</param>
         /// <returns>Data of favourite</returns>
         [MultiReturn("name", "value", "unknown")]
-        public Dictionary<string, object> ToData(AttributeDefinition attributeDefinition)
+        public Dictionary<string, object> ToData(Attributes attributeDefinition)
         {
             var ifnrMap = attributeDefinition
-                .DefinitionCollection
+                .AttributeCollection
                 .AttributeDefinition
                 .ToDictionary(a => a.Ifnr);
 
@@ -243,7 +278,7 @@ namespace Allplan
         /// <param name="attributeFavourites">The favourites</param>
         /// <param name="excludeByIfnr">Attribute to be excluded given its <c>Ifnr</c></param>
         /// <returns>An array of names</returns>
-        public static string[] ToAttributeNames(AttributeDefinition attributeDefinition, AttributeFavourite[] attributeFavourites, long[] excludeByIfnr)
+        public static string[] ToAttributeNames(Attributes attributeDefinition, AttributeFavourites[] attributeFavourites, long[] excludeByIfnr)
         {
             if (null == attributeDefinition || null == attributeFavourites)
                 return new string[] { };
@@ -252,7 +287,7 @@ namespace Allplan
             Array.Sort(blackListIfNr);
 
             var ifnrMap = attributeDefinition
-                .DefinitionCollection
+                .AttributeCollection
                 .AttributeDefinition
                 .Where(a => Array.BinarySearch(blackListIfNr, a.Ifnr) < 0) // Only those which are not in the blacklist
                 .ToDictionary(a => a.Ifnr);
@@ -275,8 +310,8 @@ namespace Allplan
         /// <param name="attributeFavourites">The favourites</param>
         /// <param name="header">The attibute name header</param>
         /// <returns>A matrix where each rows is a favourite and columns denote the attribute values</returns>
-        internal static string[][] ToAttributeValueData(AttributeDefinition attributeDefinition, 
-            IEnumerable<AttributeFavourite> attributeFavourites, Tuple<string, int>[] header)
+        internal static string[][] ToAttributeValueData(Attributes attributeDefinition, 
+            IEnumerable<AttributeFavourites> attributeFavourites, Tuple<string, int>[] header)
         {
             if (null == attributeDefinition || null == attributeFavourites)
                 return new string[][] { };
@@ -321,7 +356,7 @@ namespace Allplan
         /// <param name="attributeFavourites">The favourites</param>
         /// <param name="excludeByIfnr">Attribute to be excluded given its <c>Ifnr</c></param>
         /// <returns>A matrix where each rows is a favourite and columns denote the attribute values</returns>
-        public static string[][] ToAttributeValueData(AttributeDefinition attributeDefinition, AttributeFavourite[] attributeFavourites, long[] excludeByIfnr)
+        public static string[][] ToAttributeValueData(Attributes attributeDefinition, AttributeFavourites[] attributeFavourites, long[] excludeByIfnr)
         {
             var header = ToAttributeNames(attributeDefinition, attributeFavourites, excludeByIfnr)
                 .OrderBy(a => a)

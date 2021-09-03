@@ -4,7 +4,7 @@ using Autodesk.DesignScript.Runtime;
 
 #pragma warning disable CS1591 // Missing comments only public methods / accessors
 
-namespace GGUStratic.Data
+namespace IlseDynamo.Data.GGU
 {
     [IsVisibleInDynamoLibrary(false)]
     public class SoilMainType : DrillingModelElement

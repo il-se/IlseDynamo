@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Allplan
+namespace IlseDynamo.Allplan
 {
     /// <summary>
     /// An attribute level matrix associating LOI indexes versus attribute names
@@ -14,10 +12,11 @@ namespace Allplan
     {
         #region Internals
 
-        internal SortedDictionary<int, AttributeLevel> AttributeLevels { get; private set; } = new SortedDictionary<int, AttributeLevel>();
+        internal SortedDictionary<int, AttributeLevels> AttributeLevels { get; private set; }
 
         internal AttributeMatrix()
         {
+            AttributeLevels = new SortedDictionary<int, AttributeLevels>();
         }
 
         #endregion
@@ -27,9 +26,9 @@ namespace Allplan
         /// </summary>
         /// <param name="level">The maximum level</param>
         /// <returns>A custom attribute level aggregating all lower levels</returns>
-        public AttributeLevel AllUpToLevel(int level)
+        public AttributeLevels AllUpToLevel(int level)
         {
-            return new AttributeLevel
+            return new AttributeLevels
             {
                 Level = level,
                 Attributes = AttributeLevels.TakeWhile(l => l.Key <= level).SelectMany(l => l.Value.Attributes).Distinct().ToArray()
@@ -49,7 +48,7 @@ namespace Allplan
         /// </summary>
         /// <param name="attributeLevels"></param>
         /// <returns></returns>
-        public static AttributeMatrix ByAttributeLevels(AttributeLevel[] attributeLevels)
+        public static AttributeMatrix ByAttributeLevels(AttributeLevels[] attributeLevels)
         {
             var matrix = new AttributeMatrix();
             foreach (var level in attributeLevels)
@@ -61,12 +60,25 @@ namespace Allplan
         /// New LOI definitions by given data import.
         /// </summary>
         /// <param name="levelAndAttribute">Rowwise data with <c>Level index</c> and <c>Attribute name</c></param>
+        /// <param name="defaultLevel">Default level (1)</param>
         /// <returns></returns>
-        public static AttributeMatrix ByData(object[][] levelAndAttribute)
+        public static AttributeMatrix ByData(object[][] levelAndAttribute, int defaultLevel = 1)
         {
             return ByData(levelAndAttribute
-                .Where(r => r?.Length > 0)
-                .Select(r => new Tuple<int, string>(int.Parse(r[0].ToString()), r[1].ToString())));
+                .Where(row => row?.Length > 1)
+                .Where(row => row.All(col => null != col))
+                .Select(row => 
+                {
+                    try 
+                    {
+                        var level = int.Parse(row[0].ToString());
+                        return new Tuple<int, string>(level, row[1].ToString());
+                    }
+                    catch(Exception e)
+                    {
+                        return new Tuple<int, string>(defaultLevel, row[1].ToString());
+                    }
+                }));
         }
 
         /// <summary>
@@ -79,7 +91,7 @@ namespace Allplan
             var matrix = new AttributeMatrix();
             foreach (var level in levelAndAttribute
                 .ToLookup(t => t.Item1, t => t.Item2.Trim())
-                .Select(g => new AttributeLevel { Level = g.Key, Attributes = g.ToArray() }))
+                .Select(g => new AttributeLevels { Level = g.Key, Attributes = g.ToArray() }))
             {
                 matrix.AttributeLevels[level.Level] = level;
             }

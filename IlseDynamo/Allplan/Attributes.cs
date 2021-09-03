@@ -2,15 +2,12 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Autodesk.DesignScript.Runtime;
 
-using Internal;
-using Allplan.Data;
+using IlseDynamo.Data.Allplan;
 
-namespace Allplan
+namespace IlseDynamo.Allplan
 {
     /// <summary>
     /// Merge strategy of attribute collection merge request.
@@ -40,26 +37,26 @@ namespace Allplan
     }
 
     /// <summary>
-    /// Node collection for handling Allplan Attribute Definitions
+    /// Allplan attribute definitions.
     /// </summary>
-    public class AttributeDefinition
+    public class Attributes
     {
         #region Internals
 
         internal string FileName { get; set; }
-        internal AttributeDefinitionCollection DefinitionCollection { get; set; }
+        internal AttributeDefinitionCollection AttributeCollection { get; set; }
 
-        internal AttributeDefinition()
+        internal Attributes()
         {
         }
 
-        internal AttributeDefinition NewWithSameRegion(IEnumerable<Data.AttributeDefinition> attributeDefinitions)
+        internal Attributes NewWithSameRegion(IEnumerable<AttributeDefinition> attributeDefinitions)
         {
-            return new AttributeDefinition
+            return new Attributes
             {
-                DefinitionCollection = new AttributeDefinitionCollection
+                AttributeCollection = new AttributeDefinitionCollection
                 {
-                    Region = DefinitionCollection?.Region,
+                    Region = AttributeCollection?.Region,
                     AttributeDefinition = attributeDefinitions.ToList()
                 }
             };
@@ -75,18 +72,18 @@ namespace Allplan
         /// <param name="right">The right hand definition</param>
         /// <returns></returns>
         [MultiReturn("equal", "leftConflicts", "rightConflicts", "onlyLeft", "onlyRight")]
-        public static Dictionary<string, AttributeDefinition> Diff(AttributeDefinition left, AttributeDefinition right)
+        public static Dictionary<string, Attributes> Diff(Attributes left, Attributes right)
         {
-            var leftIfNrMap = left.DefinitionCollection.AttributeDefinition.ToDictionary(a => a.Ifnr);
-            var rightIfNrMap = right.DefinitionCollection.AttributeDefinition.ToDictionary(a => a.Ifnr);
+            var leftIfNrMap = left.AttributeCollection.AttributeDefinition.ToDictionary(a => a.Ifnr);
+            var rightIfNrMap = right.AttributeCollection.AttributeDefinition.ToDictionary(a => a.Ifnr);
 
-            if (!EqualityComparer<string>.Default.Equals(left.DefinitionCollection.Region, right.DefinitionCollection.Region))
-                throw new Exception($"Regions don't match ({left.DefinitionCollection.Region} != {right.DefinitionCollection.Region})");
+            if (!EqualityComparer<string>.Default.Equals(left.AttributeCollection.Region, right.AttributeCollection.Region))
+                throw new Exception($"Regions don't match ({left.AttributeCollection.Region} != {right.AttributeCollection.Region})");
 
-            List<Data.AttributeDefinition> leftConflicts = new List<Data.AttributeDefinition>();
-            List<Data.AttributeDefinition> rightConflicts = new List<Data.AttributeDefinition>();
-            List<Data.AttributeDefinition> equals = new List<Data.AttributeDefinition>();
-            List<Data.AttributeDefinition> onlyLeft = new List<Data.AttributeDefinition>();
+            List<AttributeDefinition> leftConflicts = new List<AttributeDefinition>();
+            List<AttributeDefinition> rightConflicts = new List<AttributeDefinition>();
+            List<AttributeDefinition> equals = new List<AttributeDefinition>();
+            List<AttributeDefinition> onlyLeft = new List<AttributeDefinition>();
             foreach (var leftIfNr in leftIfNrMap.Keys)
             {
                 if (!rightIfNrMap.ContainsKey(leftIfNr))
@@ -104,7 +101,7 @@ namespace Allplan
                 }
             }
 
-            return new Dictionary<string, AttributeDefinition>()
+            return new Dictionary<string, Attributes>()
             {
                 { "equal", left.NewWithSameRegion(equals) },
                 { "leftConflicts", left.NewWithSameRegion(leftConflicts) },
@@ -122,50 +119,72 @@ namespace Allplan
         /// <param name="mergeStrategy">The strategy</param>
         /// <returns></returns>
         [MultiReturn("attributeDefintion", "report")]
-        public static Dictionary<string, object> Merge(AttributeDefinition left, AttributeDefinition right, MergeStrategy mergeStrategy)
+        public static Dictionary<string, object> Merge(Attributes left, Attributes right, MergeStrategy mergeStrategy)
         {
-            var leftIfNrMap = left.DefinitionCollection.AttributeDefinition.ToDictionary(a => a.Ifnr);
-            var rightIfNrMap = right.DefinitionCollection.AttributeDefinition.ToDictionary(a => a.Ifnr);
-
-            var finalMerge = leftIfNrMap
-                .Where(a => !rightIfNrMap.ContainsKey(a.Key))
-                .Concat(rightIfNrMap.Where(a => !leftIfNrMap.ContainsKey(a.Key)))
-                .Select(a => a.Value)
+            var leftByIfNR = left
+                .AttributeCollection
+                .AttributeDefinition
+                .ToDictionary(a => a.Ifnr);
+            var rightByIfNR = right
+                .AttributeCollection
+                .AttributeDefinition
+                .ToDictionary(a => a.Ifnr);
+            // Sequence of definitons without duplicate IfNR keys
+            var lrUniqueIfNR = leftByIfNR
+                .Where(l => !rightByIfNR.ContainsKey(l.Key))
+                .Concat(rightByIfNR.Where(r => !leftByIfNR.ContainsKey(r.Key)))
+                .Select(a => a.Value)                
                 .ToList();
 
             var report = new List<string[]>();
 
-            foreach (var ifnr in leftIfNrMap.Keys.Where(k => rightIfNrMap.ContainsKey(k)))
+            foreach (var ifnr in leftByIfNR.Keys.Where(ifnr => rightByIfNR.ContainsKey(ifnr)))
             {
-                var la = leftIfNrMap[ifnr];
-                var ra = rightIfNrMap[ifnr];
-                if (!la.Equals(ra))
+                var leftAttribute = leftByIfNR[ifnr];
+                var rightAttribute = rightByIfNR[ifnr];
+
+                if (leftAttribute.Equals(rightAttribute))
+                {
+                    switch (mergeStrategy)
+                    {
+                        case MergeStrategy.ThrowExceptionOnFirst:
+                        case MergeStrategy.TryCaseInvariantPreferLeft:
+                        case MergeStrategy.UseLeftSideByDefault:
+                            lrUniqueIfNR.Add(leftAttribute);
+                            break;
+                        case MergeStrategy.TryCaseInvariantPreferRight:
+                        case MergeStrategy.UseRightSideByDefault:
+                            lrUniqueIfNR.Add(rightAttribute);
+                            break;
+                    }
+                }
+                else
                 {
                     switch(mergeStrategy)
                     {
                         case MergeStrategy.ThrowExceptionOnFirst:
-                            throw new Exception($"IfNr #{ifnr} causes conflicts (left name '{la.Text}' != '{ra.Text}'");
+                            throw new Exception($"IfNr #{ifnr} causes conflicts (left name '{leftAttribute.Text}' != '{rightAttribute.Text}'");
                         case MergeStrategy.TryCaseInvariantPreferRight:
                         case MergeStrategy.TryCaseInvariantPreferLeft:
-                            if (string.Equals(la.Text, ra.Text, StringComparison.CurrentCultureIgnoreCase))
+                            if (string.Equals(leftAttribute.Text, rightAttribute.Text, StringComparison.CurrentCultureIgnoreCase))
                             {
                                 if (mergeStrategy == MergeStrategy.TryCaseInvariantPreferLeft)
-                                    finalMerge.Add(la);
+                                    lrUniqueIfNR.Add(leftAttribute);
                                 else
-                                    finalMerge.Add(ra);
+                                    lrUniqueIfNR.Add(rightAttribute);
 
-                                report.Add(new string[] { $"{la.Ifnr}", $"Case invariant match '{la.Text}' vs. '{ra.Text}'" });
+                                report.Add(new string[] { $"{leftAttribute.Ifnr}", $"Case invariant match '{leftAttribute.Text}' vs. '{rightAttribute.Text}'" });
                             }
                             else
-                                throw new Exception($"IfNr #{ifnr} causes conflicts (left name '{la.Text}' != '{ra.Text}'");
+                                throw new Exception($"IfNr #{ifnr} causes conflicts (left name '{leftAttribute.Text}' != '{rightAttribute.Text}'");
                             break;
                         case MergeStrategy.UseLeftSideByDefault:
-                            finalMerge.Add(la);
-                            report.Add(new string[] { $"{la.Ifnr}", $"Using left: '{la.Text}' vs. '{ra.Text}'" });
+                            lrUniqueIfNR.Add(leftAttribute);
+                            report.Add(new string[] { $"{leftAttribute.Ifnr}", $"Using left: '{leftAttribute.Text}' vs. '{rightAttribute.Text}'" });
                             break;
                         case MergeStrategy.UseRightSideByDefault:
-                            finalMerge.Add(ra);
-                            report.Add(new string[] { $"{la.Ifnr}", $"Using right: '{la.Text}' vs. '{ra.Text}'" });
+                            lrUniqueIfNR.Add(rightAttribute);
+                            report.Add(new string[] { $"{leftAttribute.Ifnr}", $"Using right: '{leftAttribute.Text}' vs. '{rightAttribute.Text}'" });
                             break;
                     }
                 }
@@ -173,7 +192,15 @@ namespace Allplan
 
             return new Dictionary<string, object>()
             {
-                { "attributeDefintion", left.NewWithSameRegion(finalMerge) },
+                { "attributeDefintion", new Attributes
+                    {
+                        AttributeCollection = new AttributeDefinitionCollection
+                        {
+                            Region = left.AttributeCollection.Region,
+                            AttributeDefinition = lrUniqueIfNR
+                        }
+                    }
+                },
                 { "report", report.ToArray() }
             };
         }
@@ -183,12 +210,12 @@ namespace Allplan
         /// </summary>
         /// <param name="fileName">The file name</param>
         /// <returns>An attribute definition</returns>
-        public static AttributeDefinition ByFileName(string fileName)
+        public static Attributes ByFileName(string fileName)
         {
-            return new AttributeDefinition
+            return new Attributes
             {
                 FileName = fileName,
-                DefinitionCollection = AttributeDefinitionCollection.ReadFrom(fileName)
+                AttributeCollection = AttributeDefinitionCollection.ReadFrom(fileName)
             };
         }
 
@@ -201,10 +228,10 @@ namespace Allplan
         {
             return new Dictionary<string, object>() 
             {
-                { "ifnr", DefinitionCollection.AttributeDefinition.Select(a => a.Ifnr).ToArray() },
-                { "name", DefinitionCollection.AttributeDefinition.Select(a => a.Text).ToArray() },
-                { "datatype", DefinitionCollection.AttributeDefinition.Select(a => a.Datatype).ToArray() },
-                { "parentGroup", DefinitionCollection.AttributeDefinition.Select(a => a.ParentUserDirCode).ToArray() },
+                { "ifnr", AttributeCollection.AttributeDefinition.Select(a => a.Ifnr).ToArray() },
+                { "name", AttributeCollection.AttributeDefinition.Select(a => a.Text).ToArray() },
+                { "datatype", AttributeCollection.AttributeDefinition.Select(a => a.Datatype).ToArray() },
+                { "parentGroup", AttributeCollection.AttributeDefinition.Select(a => a.ParentUserDirCode).ToArray() },
             };
         }
 
@@ -218,7 +245,7 @@ namespace Allplan
         [MultiReturn("attributeName", "ifnr")]
         public Dictionary<string, object> Validate(bool ignoreCase, bool trimStart = true, bool trimEnd = true)        
         {
-            Func<Data.AttributeDefinition, string> nameUnifier = (d) =>
+            Func<AttributeDefinition, string> nameUnifier = (d) =>
             {
                 var key = ignoreCase ? d.Text.ToUpperInvariant() : d.Text;
                 if (trimStart)
@@ -228,7 +255,7 @@ namespace Allplan
                 return key;
             };
 
-            var duplicates = DefinitionCollection.AttributeDefinition
+            var duplicates = AttributeCollection.AttributeDefinition
                 .ToLookup(nameUnifier)
                 .Where(g => g.Count() > 1)
                 .SelectMany(g => g.Select(d => new Tuple<string, long>(d.Text, d.Ifnr)));
@@ -245,7 +272,7 @@ namespace Allplan
         /// <returns>String representation</returns>
         public override string ToString()
         {
-            return $"{Path.GetFileName(FileName)} ({DefinitionCollection.Region}, {DefinitionCollection.AttributeDefinition.Count})";
+            return $"{Path.GetFileName(FileName)} ({AttributeCollection.Region}, {AttributeCollection.AttributeDefinition.Count} attributes)";
         }
     }
 }

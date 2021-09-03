@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<doc>
+  <assembly>
+    <name>IlseDynamo</name>
+  </assembly>
+  <namespaces>
+    <namespace name="IlseDynamo.Allplan">
+      <category>Allplan</category>
+    </namespace>
+    <namespace name="IlseDynamo.GGUStratig">
+      <category>GGUStratig</category>
+    </namespace>
+    <namespace name="IlseDynamo.Tasks">
+      <category>Tasks</category>
+    </namespace>
+  </namespaces>
+</doc>

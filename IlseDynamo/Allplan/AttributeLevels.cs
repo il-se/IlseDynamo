@@ -6,17 +6,17 @@ using Internal;
 
 using Autodesk.DesignScript.Runtime;
 
-namespace Allplan
+namespace IlseDynamo.Allplan
 {
     /// <summary>
     /// Level Of Information structure comprised of numerical level and a set of attribute names which
     /// have to exist
     /// </summary>
-    public class AttributeLevel
+    public class AttributeLevels
     {
         #region Internals
                 
-        internal AttributeLevel()
+        internal AttributeLevels()
         {
         }
 
@@ -29,10 +29,10 @@ namespace Allplan
         /// <param name="attributes">The attributes</param>
         /// <param name="ignoreCase">Whether being case sensitive or not. Default is false</param>
         /// <returns>A new attribute level</returns>
-        public static AttributeLevel ByLevelAndAttributes(int level, string[] attributes, bool ignoreCase = false)
+        public static AttributeLevels ByLevelAndAttributes(int level, string[] attributes, bool ignoreCase = false)
         {
             var set = attributes.ToSet(ignoreCase);
-            return new AttributeLevel
+            return new AttributeLevels
             {
                 Level = level,
                 Attributes = set.ToArray()
@@ -80,13 +80,13 @@ namespace Allplan
         /// <param name="attributeDefinition">The definition</param>
         /// <param name="attributeFavourites">The template favourites</param>
         /// <returns>A data matrix of favourite names versus attribute values</returns>
-        public string[][] ToAttributeValueData(AttributeDefinition attributeDefinition, AttributeFavourite[] attributeFavourites)
+        public string[][] ToAttributeValueData(Attributes attributeDefinition, AttributeFavourites[] attributeFavourites)
         {
             var header = Attributes.OrderBy(a => a)
                 .Select((a, i) => new Tuple<string, int>(a, i))
                 .ToArray();
             // Get the level of each favourite according to this level
-            return AttributeFavourite.ToAttributeValueData(
+            return AttributeFavourites.ToAttributeValueData(
                     attributeDefinition,                 
                     attributeFavourites.Select(f => f.OfLevel(this, attributeDefinition)), 
                     header);

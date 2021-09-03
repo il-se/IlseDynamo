@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Tasks
+namespace IlseDynamo.Tasks
 {
     /// <summary>
     /// Converter tasks.

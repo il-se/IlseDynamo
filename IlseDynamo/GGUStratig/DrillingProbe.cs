@@ -5,9 +5,9 @@ using System.Linq;
 
 using Autodesk.DesignScript.Geometry;
 
-using GGUStratic.Data;
+using IlseDynamo.Data.GGU;
 
-namespace GGUStratig
+namespace IlseDynamo.GGUStratig
 {
     /// <summary>
     /// The descriptive data of a drilling record.

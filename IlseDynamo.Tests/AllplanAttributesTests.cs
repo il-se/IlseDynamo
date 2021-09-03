@@ -4,11 +4,9 @@ using System.Linq;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using System.Globalization;
+using IlseDynamo.Data.Allplan;
 
-using Allplan.Data;
-
-namespace Allplan
+namespace IlseDynamo.Allplan
 {
     [TestClass]
     public class AllplanAttributesTests
