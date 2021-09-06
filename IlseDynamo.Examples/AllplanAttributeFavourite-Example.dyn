@@ -12,7 +12,7 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "Allplan.AttributeDefinition.ByFileName@string",
+      "FunctionSignature": "IlseDynamo.Allplan.Attributes.ByFileName@string",
       "Id": "de696f61142c431ba51b7e07c953c90c",
       "Inputs": [
         {
@@ -28,7 +28,7 @@
       "Outputs": [
         {
           "Id": "8ae64c8b79b749a6b72efde37b4d8632",
-          "Name": "AttributeDefinition",
+          "Name": "Attributes",
           "Description": "An attribute definition",
           "UsingDefaultValue": false,
           "Level": 2,
@@ -37,7 +37,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Reads a new attribute definition by file name.\n\nAttributeDefinition.ByFileName (fileName: string): AttributeDefinition"
+      "Description": "Reads a new attribute definition by file name.\n\nAttributes.ByFileName (fileName: string): Attributes"
     },
     {
       "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
@@ -62,7 +62,7 @@
     },
     {
       "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
-      "HintPath": "C:\\Workspace\\Git\\IlseDynamo\\IlseDynamo.Tests\\Resources\\AttributeDefinitionCollectionLocal_de.xml",
+      "HintPath": "..\\IlseDynamo.Tests\\Resources\\AttributeDefinitionCollectionLocal_de.xml",
       "InputValue": "..\\IlseDynamo.Tests\\Resources\\AttributeDefinitionCollectionLocal_de.xml",
       "NodeType": "ExtensionNode",
       "Id": "3a71f92adc6a40e5bc2a791736372267",
@@ -134,7 +134,7 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "Allplan.AttributeFavourite.ByFileName@string,string",
+      "FunctionSignature": "IlseDynamo.Allplan.AttributeFavourites.ByFileName@string,string",
       "Id": "0650643a6cde4a4db2fed304cb447aa2",
       "Inputs": [
         {
@@ -159,7 +159,7 @@
       "Outputs": [
         {
           "Id": "f41fdb837b8e41f2b41b6debdff4f8fe",
-          "Name": "AttributeFavourite",
+          "Name": "AttributeFavourites",
           "Description": "A favourite",
           "UsingDefaultValue": false,
           "Level": 2,
@@ -168,18 +168,18 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Imports an Allplan Favourite file.\n\nAttributeFavourite.ByFileName (fileName: string, basePath: string): AttributeFavourite"
+      "Description": "Imports an Allplan Favourite file.\n\nAttributeFavourites.ByFileName (fileName: string, basePath: string): AttributeFavourites"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "Allplan.AttributeFavourite.ToData@Allplan.AttributeDefinition",
+      "FunctionSignature": "IlseDynamo.Allplan.AttributeFavourites.ToData@IlseDynamo.Allplan.Attributes",
       "Id": "73ccf995ba0744738334a5be19c296c2",
       "Inputs": [
         {
           "Id": "bc63587215704a5a803df504562329a5",
-          "Name": "attributeFavourite",
-          "Description": "Allplan.AttributeFavourite",
+          "Name": "attributeFavourites",
+          "Description": "IlseDynamo.Allplan.AttributeFavourites",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -188,7 +188,7 @@
         {
           "Id": "e9c7ad6dd3634f75a2ea2a0c6c473684",
           "Name": "attributeDefinition",
-          "Description": "The definition to resolve IFNR against\n\nAttributeDefinition",
+          "Description": "The definition to resolve IFNR against\n\nAttributes",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -225,18 +225,18 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Dumps the data of favourite using the given defintion for resolving.\n\nAttributeFavourite.ToData (attributeDefinition: AttributeDefinition): var[]..[]"
+      "Description": "Dumps the data of favourite using the given defintion for resolving.\n\nAttributeFavourites.ToData (attributeDefinition: Attributes): var[]..[]"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "Allplan.AttributeFavourite.Name",
+      "FunctionSignature": "IlseDynamo.Allplan.AttributeFavourites.Name",
       "Id": "7f689b1fd5bd40ac8d3b99008cc7f518",
       "Inputs": [
         {
           "Id": "aa1191e9d58543bc81629516378831c1",
-          "Name": "attributeFavourite",
-          "Description": "Allplan.AttributeFavourite",
+          "Name": "attributeFavourites",
+          "Description": "IlseDynamo.Allplan.AttributeFavourites",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -255,7 +255,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Gets the file name (without extension and path).\n\nAttributeFavourite.Name: string"
+      "Description": "AttributeFavourites.Name: string"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
@@ -421,23 +421,40 @@
   "NodeLibraryDependencies": [
     {
       "Name": "IlseDynamo",
-      "Version": "0.1.0",
+      "Version": "0.99.21249.9414",
       "ReferenceType": "Package",
       "Nodes": [
-        "7f689b1fd5bd40ac8d3b99008cc7f518",
         "de696f61142c431ba51b7e07c953c90c",
         "0650643a6cde4a4db2fed304cb447aa2",
-        "73ccf995ba0744738334a5be19c296c2"
+        "73ccf995ba0744738334a5be19c296c2",
+        "7f689b1fd5bd40ac8d3b99008cc7f518"
       ]
     }
   ],
+  "Thumbnail": null,
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "Keine",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.5.0.7186",
+      "Version": "2.12.0.5650",
       "RunType": "Automatic",
       "RunPeriod": "1000"
     },
@@ -456,7 +473,7 @@
     "NodeViews": [
       {
         "ShowGeometry": true,
-        "Name": "AttributeDefinition.ByFileName",
+        "Name": "Attributes.ByFileName",
         "Id": "de696f61142c431ba51b7e07c953c90c",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -491,8 +508,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1076.4323637579234,
-        "Y": 90.847170295612386
+        "X": 1088.4628950396032,
+        "Y": 21.671615425953973
       },
       {
         "ShowGeometry": true,
@@ -506,7 +523,7 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "AttributeFavourite.ByFileName",
+        "Name": "AttributeFavourites.ByFileName",
         "Id": "0650643a6cde4a4db2fed304cb447aa2",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -516,7 +533,7 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "AttributeFavourite.ToData",
+        "Name": "AttributeFavourites.ToData",
         "Id": "73ccf995ba0744738334a5be19c296c2",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -526,7 +543,7 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "AttributeFavourite.Name",
+        "Name": "AttributeFavourites.Name",
         "Id": "7f689b1fd5bd40ac8d3b99008cc7f518",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -571,13 +588,13 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1079.54539603101,
-        "Y": -60.436296253417765
+        "X": 1105.1102750045795,
+        "Y": -230.36755060714393
       }
     ],
     "Annotations": [],
-    "X": -266.9085314512555,
-    "Y": 148.03073463281345,
-    "Zoom": 0.870814725338435
+    "X": -120.61324149249901,
+    "Y": 215.39070656351197,
+    "Zoom": 0.66497478895071893
   }
 }

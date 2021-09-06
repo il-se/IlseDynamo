@@ -12,7 +12,7 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "Allplan.AttributeDefinition.ByFileName@string",
+      "FunctionSignature": "IlseDynamo.Allplan.Attributes.ByFileName@string",
       "Id": "de696f61142c431ba51b7e07c953c90c",
       "Inputs": [
         {
@@ -28,7 +28,7 @@
       "Outputs": [
         {
           "Id": "8ae64c8b79b749a6b72efde37b4d8632",
-          "Name": "AttributeDefinition",
+          "Name": "Attributes",
           "Description": "An attribute definition",
           "UsingDefaultValue": false,
           "Level": 2,
@@ -37,18 +37,18 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Reads a new attribute definition by file name.\n\nAttributeDefinition.ByFileName (fileName: string): AttributeDefinition"
+      "Description": "Reads a new attribute definition by file name.\n\nAttributes.ByFileName (fileName: string): Attributes"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "Allplan.AttributeDefinition.ToData",
+      "FunctionSignature": "IlseDynamo.Allplan.Attributes.ToData",
       "Id": "c2336de88a534e01aa35823c49bf6874",
       "Inputs": [
         {
           "Id": "7b5083b61eef40ba916b14796e74dbe2",
-          "Name": "attributeDefinition",
-          "Description": "Allplan.AttributeDefinition",
+          "Name": "attributes",
+          "Description": "IlseDynamo.Allplan.Attributes",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -94,7 +94,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Splits the definition into single attribute data groups.\n\nAttributeDefinition.ToData ( ): var[]..[]"
+      "Description": "Splits the definition into single attribute data groups.\n\nAttributes.ToData ( ): var[]..[]"
     },
     {
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
@@ -156,7 +156,7 @@
     },
     {
       "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
-      "HintPath": "C:\\Workspace\\Git\\IlseDynamo\\IlseDynamo.Tests\\Resources\\AttributeDefinitionCollectionLocal_de.xml",
+      "HintPath": "..\\IlseDynamo.Tests\\Resources\\AttributeDefinitionCollectionLocal_de.xml",
       "InputValue": "..\\IlseDynamo.Tests\\Resources\\AttributeDefinitionCollectionLocal_de.xml",
       "NodeType": "ExtensionNode",
       "Id": "3a71f92adc6a40e5bc2a791736372267",
@@ -178,13 +178,13 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "Allplan.AttributeDefinition.Diff@Allplan.AttributeDefinition,Allplan.AttributeDefinition",
+      "FunctionSignature": "IlseDynamo.Allplan.Attributes.Diff@IlseDynamo.Allplan.Attributes,IlseDynamo.Allplan.Attributes",
       "Id": "87a4162726884a278cc47d81101ffeae",
       "Inputs": [
         {
           "Id": "cb2cfdd613ee4c0c9e759615f64b86d3",
           "Name": "left",
-          "Description": "The left hand definition\n\nAttributeDefinition",
+          "Description": "The left hand definition\n\nAttributes",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -193,7 +193,7 @@
         {
           "Id": "6fdbcf72dee44472935d23a1b79d7e76",
           "Name": "right",
-          "Description": "The right hand definition\n\nAttributeDefinition",
+          "Description": "The right hand definition\n\nAttributes",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -248,7 +248,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Compares two definition collection against eachother and returns equal definitions and conflicts of left and right separatly.\n\nAttributeDefinition.Diff (left: AttributeDefinition, right: AttributeDefinition): var[]..[]"
+      "Description": "Compares two definition collection against eachother and returns equal definitions and conflicts of left and right separatly.\n\nAttributes.Diff (left: Attributes, right: Attributes): var[]..[]"
     },
     {
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
@@ -427,13 +427,13 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
       "NodeType": "FunctionNode",
-      "FunctionSignature": "Allplan.AttributeDefinition.ToData",
+      "FunctionSignature": "IlseDynamo.Allplan.Attributes.ToData",
       "Id": "62a89bbfef1345759c583402d87142a9",
       "Inputs": [
         {
           "Id": "bd2354f203664582bc47ee287c9ac29b",
-          "Name": "attributeDefinition",
-          "Description": "Allplan.AttributeDefinition",
+          "Name": "attributes",
+          "Description": "IlseDynamo.Allplan.Attributes",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -479,7 +479,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Splits the definition into single attribute data groups.\n\nAttributeDefinition.ToData ( ): var[]..[]"
+      "Description": "Splits the definition into single attribute data groups.\n\nAttributes.ToData ( ): var[]..[]"
     },
     {
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
@@ -587,23 +587,40 @@
   "NodeLibraryDependencies": [
     {
       "Name": "IlseDynamo",
-      "Version": "0.1.0",
+      "Version": "0.99.21249.9414",
       "ReferenceType": "Package",
       "Nodes": [
-        "62a89bbfef1345759c583402d87142a9",
         "de696f61142c431ba51b7e07c953c90c",
         "c2336de88a534e01aa35823c49bf6874",
-        "87a4162726884a278cc47d81101ffeae"
+        "87a4162726884a278cc47d81101ffeae",
+        "62a89bbfef1345759c583402d87142a9"
       ]
     }
   ],
+  "Thumbnail": null,
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    }
+  ],
+  "Author": "None provided",
+  "Linting": {
+    "activeLinter": "Keine",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.5.0.7186",
+      "Version": "2.12.0.5650",
       "RunType": "Automatic",
       "RunPeriod": "1000"
     },
@@ -622,7 +639,7 @@
     "NodeViews": [
       {
         "ShowGeometry": true,
-        "Name": "AttributeDefinition.ByFileName",
+        "Name": "Attributes.ByFileName",
         "Id": "de696f61142c431ba51b7e07c953c90c",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -632,7 +649,7 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "AttributeDefinition.ToData",
+        "Name": "Attributes.ToData",
         "Id": "c2336de88a534e01aa35823c49bf6874",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -672,7 +689,7 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "AttributeDefinition.Diff",
+        "Name": "Attributes.Diff",
         "Id": "87a4162726884a278cc47d81101ffeae",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -742,7 +759,7 @@
       },
       {
         "ShowGeometry": true,
-        "Name": "AttributeDefinition.ToData",
+        "Name": "Attributes.ToData",
         "Id": "62a89bbfef1345759c583402d87142a9",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
@@ -762,8 +779,8 @@
       }
     ],
     "Annotations": [],
-    "X": -214.91529486081293,
-    "Y": 131.41875628239683,
-    "Zoom": 0.71394601581534245
+    "X": 85.92379223744183,
+    "Y": 298.45073791896067,
+    "Zoom": 0.23227860025300867
   }
 }
