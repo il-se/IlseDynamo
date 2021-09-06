@@ -3,8 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
-using Internal;
-
+using IlseDynamo.Internal;
 using IlseDynamo.Data.Allplan;
 
 using Autodesk.DesignScript.Runtime;
@@ -14,21 +13,26 @@ namespace IlseDynamo.Allplan
     /// <summary>
     /// Node mapping for an Allplan Attribite Favourite (*.atfanfx).
     /// </summary>
-    public class AttributeFavourites
+    public class AttributeFavourites : LocalResourceFile
     {
         #region Internal
 
         internal const string EXTENSION = ".atfanfx";
 
-        private string FileName { get; set; }
-        private string BasePath { get; set; }
-        private AllplanAttributesContainer Favourite { get; set; }
+        internal AllplanAttributesContainer Favourite { get; set; }
 
         internal AttributeFavourites()
         {
         }
 
         #endregion
+
+        /// <inheritdoc/>
+        public new string Folder { get => base.Folder; }
+        /// <inheritdoc/>
+        public new string Name { get => base.Name; }
+        /// <inheritdoc/>
+        public new string BaseFolder { get => base.BaseFolder; }
 
         /// <summary>
         /// Imports an Allplan Favourite file.
@@ -49,12 +53,15 @@ namespace IlseDynamo.Allplan
         /// <summary>
         /// Create a new favourite by names from given attribute definition.
         /// </summary>
+        /// <param name="favouriteName">Favourite name</param>
+        /// <param name="favouriteBasePath">Favourite base path</param>
         /// <param name="attributeNames">The names</param>
         /// <param name="attributes">The attribute definition</param>
         /// <param name="caseInsensitive">Case insensitive (false by default)</param>
         /// <returns>The favourite from matches and missing names by definition</returns>
         [MultiReturn("favourite", "missing")]
-        public static Dictionary<string, object> ByAttributeNames(string[] attributeNames, Attributes attributes, bool caseInsensitive = false)
+        public static Dictionary<string, object> ByAttributeNames(string favouriteName, string favouriteBasePath, 
+            string[] attributeNames, Attributes attributes, bool caseInsensitive = false)
         {
             var matches = attributeNames.Select(name =>
                 (name, attributes.AttributeCollection.AttributeDefinition.Find(a => 0 == string.Compare(a.Name, name, caseInsensitive))))
@@ -64,6 +71,8 @@ namespace IlseDynamo.Allplan
             {
                 { "favourite", new AttributeFavourites
                     { 
+                        FileName = Path.Combine(favouriteBasePath, favouriteName + EXTENSION),                       
+                        BasePath = favouriteBasePath,
                         Favourite = new AllplanAttributesContainer
                         {
                             AttributeSet = new AllplanAttributeSet
@@ -81,31 +90,41 @@ namespace IlseDynamo.Allplan
         }
 
         /// <summary>
-        /// Returns the base folder name (if set).
+        /// Create a new favourite by GUIDs from given attribute definition.
         /// </summary>
-        public string BaseFolder
+        /// <param name="favouriteName">Favourite name</param>
+        /// <param name="favouriteBasePath">Favourite base path</param>
+        /// <param name="attributeGuids">The GUIDs</param>
+        /// <param name="attributes">The attribute definition</param>
+        /// <returns>The favourite from matches and missing GUIDs by definition</returns>
+        [MultiReturn("favourite", "missing")]
+        public static Dictionary<string, object> ByAttributeGUIDs(string favouriteName, string favouriteBasePath, 
+            Guid[] attributeGuids, Attributes attributes)
         {
-            get {
-                var baseFolder = BasePath?.Trim() ?? Path.GetDirectoryName(FileName);
-                if (!baseFolder.EndsWith($"{Path.DirectorySeparatorChar}"))
-                    return $"{baseFolder}{Path.DirectorySeparatorChar}";
-                else
-                    return $"{baseFolder}";
-            }
-        }
+            var matches = attributeGuids.Select(guid =>
+                (guid, attributes.AttributeCollection.AttributeDefinition.Find(a => a.DefinitionId == guid)))
+                .ToArray();
 
-        /// <summary>
-        /// Returns the local folder relative to the base path.
-        /// </summary>
-        public string Folder
-        {
-            get {
-                var folder = $"{Path.GetDirectoryName(FileName)}{Path.DirectorySeparatorChar}".RelativePathOf(BaseFolder);
-                if (string.IsNullOrEmpty(folder) || folder.EndsWith($"{Path.DirectorySeparatorChar}"))
-                    return folder.Trim();
-                else 
-                    return $"{folder}{Path.DirectorySeparatorChar}";
-            }
+            return new Dictionary<string, object>()
+            {
+                { "favourite", new AttributeFavourites
+                    {
+                        FileName = Path.Combine(favouriteBasePath, favouriteName + EXTENSION),
+                        BasePath = favouriteBasePath,
+                        Favourite = new AllplanAttributesContainer
+                        {
+                            AttributeSet = new AllplanAttributeSet
+                            {
+                                Attributes = matches
+                                    .Where(m => m.Item2 != null)
+                                    .Select(m => new AllplanAttribute{ Ifnr = m.Item2.Ifnr, Suffix = m.Item2.Datatype })
+                                    .ToList()
+                            }
+                        }
+                    }
+                },
+                { "missing", matches.Where(m => m.Item2 == null).Select(m => m.guid).ToArray() }
+            };
         }
 
         /// <summary>
@@ -124,14 +143,6 @@ namespace IlseDynamo.Allplan
 
             Favourite.WriteTo(finalFilePath);
             return finalFilePath;
-        }
-
-        /// <summary>
-        /// Gets the file name (without extension and path).
-        /// </summary>        
-        public string Name
-        {
-            get => Path.GetFileNameWithoutExtension(FileName);
         }
 
         /// <summary>

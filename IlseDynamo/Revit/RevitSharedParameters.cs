@@ -2,23 +2,18 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-using Autodesk.DesignScript.Runtime;
-
-using IlseDynamo.Allplan;
+using IlseDynamo.Internal;
 using IlseDynamo.Data.Revit;
 
 namespace IlseDynamo.Revit
 {
-    public class RevitSharedParameters
+    /// <summary>
+    /// Revit Shared Parameter File Resource.
+    /// </summary>
+    public class RevitSharedParameters : LocalResourceFile
     {
         #region Internals
-
-        internal string FileName { get; set; }
-
-        internal string BasePathName { get; set; }
 
         internal RevitSharedParameter[] Parameter { get; set; }
 
@@ -27,33 +22,68 @@ namespace IlseDynamo.Revit
 
         #endregion
 
-        public string FavouriteName() => FileName;
+        /// <inheritdoc/>
+        public new string Folder { get => base.Folder; }
+        /// <inheritdoc/>
+        public new string Name { get => base.Name; }
+        /// <inheritdoc/>
+        public new string BaseFolder { get => base.BaseFolder; }
 
-        public Dictionary<string, RevitSharedParameters> SplitByGroup()
+        /// <summary>
+        /// Decomposes the parameter resource by group names.
+        /// </summary>
+        /// <returns>Dictionary of group names vs. decomposed parameters</returns>
+        public Dictionary<string, RevitSharedParameters> DecomposeByGroup()
         {
             return Parameter
                 .GroupBy(p => p.Group.Name)
-                .ToDictionary(g => g.Key, g => new RevitSharedParameters { FileName = FileName, Parameter = g.ToArray() });
+                .ToDictionary(g => g.Key, g => new RevitSharedParameters 
+                { 
+                    FileName = Path.Combine(
+                        Path.GetDirectoryName(FileName), $"{Path.GetFileNameWithoutExtension(FileName)}-{g.Key}{Path.GetExtension(FileName)}"),
+                    BasePath = BasePath, 
+                    Parameter = g.ToArray() 
+                });
         }
 
+        /// <summary>
+        /// Extracts the parameter names.
+        /// </summary>
+        /// <returns>An array of names</returns>
         public string[] ToNames()
         {
             return Parameter.Select(p => p.Name).ToArray();
         }
 
+        /// <summary>
+        /// Extracts the parameter GUIDs.
+        /// </summary>
+        /// <returns>An array of paranmeter GUIDs.</returns>
         public Guid[] ToGuids()
         {
             return Parameter.Where(p => p.DefinitionId.HasValue).Select(p => p.DefinitionId.Value).ToArray();
         }
 
-        public static RevitSharedParameters ByFile(string filePathName)
+        /// <summary>
+        /// Reads a Revit Shared Parameter file as local resource.
+        /// </summary>
+        /// <param name="filePathName">The file path.</param>
+        /// <param name="basePath">An optional base path as relative base folder.</param>
+        /// <returns>A Revit shared parameter resource</returns>
+        public static RevitSharedParameters ByFile(string filePathName, string basePath = null)
         {
             return new RevitSharedParameters 
             { 
-                FileName = Path.GetFileNameWithoutExtension(filePathName),
+                FileName = filePathName,
+                BasePath = basePath,
                 Parameter = RevitSharedParameter.FromTextFile(filePathName).ToArray() 
             };
         }
 
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return $"{Name} ({Parameter.Length})";
+        }
     }
 }

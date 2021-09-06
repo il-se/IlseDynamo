@@ -47,18 +47,25 @@ namespace IlseDynamo.Data.Allplan
 
         private ControlTypes controlType;
 
+        [XmlIgnore]
         public Guid? DefinitionId { get => Uid; }
 
+        [XmlIgnore]
         public long? InstanceId { get => Ifnr; }
 
+        [XmlIgnore]
         public string Name { get => Text; }
 
+        [XmlIgnore]
         public string Description { get => Text; }
 
+        [XmlIgnore]
         public string InstanceType { get => Datatype; }
 
+        [XmlIgnore]
         public IAttributeScope[] Scopes { get => new IAttributeScope[] { }; }
 
+        [XmlIgnore]
         public AttributeTypes Type
         {
             get

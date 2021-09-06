@@ -13,5 +13,8 @@
     <namespace name="IlseDynamo.Tasks">
       <category>Tasks</category>
     </namespace>
+    <namespace name="IlseDynamo.Revit">
+      <category>Revit</category>
+    </namespace>
   </namespaces>
 </doc>

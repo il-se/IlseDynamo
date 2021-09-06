@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Autodesk.DesignScript.Runtime;
 
-namespace Internal
+namespace IlseDynamo.Internal
 {
 #pragma warning disable CS1591
 
