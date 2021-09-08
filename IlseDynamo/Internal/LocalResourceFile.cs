@@ -7,6 +7,9 @@ namespace IlseDynamo.Internal
 {
 #pragma warning disable CS1591
 
+    /// <summary>
+    /// A local file resource base implementation.
+    /// </summary>
     [IsVisibleInDynamoLibrary(false)]
     public abstract class LocalResourceFile
     {
@@ -29,7 +32,7 @@ namespace IlseDynamo.Internal
         }
 
         /// <summary>
-        /// Returns the base folder name (if set).
+        /// Returns the base folder name (if set) or the folder of file resource with an ensured separator slash at the end.
         /// </summary>
         public virtual string BaseFolder
         {
@@ -44,7 +47,7 @@ namespace IlseDynamo.Internal
         }
 
         /// <summary>
-        /// Returns the local folder relative to the base path.
+        /// Returns the local folder relative to the base path (if set) or empty string if the folder is the same as the <see cref="BaseFolder"/>.
         /// </summary>
         public virtual string Folder
         {
@@ -56,6 +59,15 @@ namespace IlseDynamo.Internal
                 else
                     return $"{folder}{Path.DirectorySeparatorChar}";
             }
+        }
+
+        /// <summary>
+        /// Replaces the name (without extension and folder).
+        /// </summary>
+        /// <param name="newName">A new name without extension</param>
+        public virtual void SetName(string newName)
+        {
+            FileName = $"{Path.GetDirectoryName(FileName)}{Path.DirectorySeparatorChar}{newName}{Path.GetExtension(FileName)}";
         }
     }
 

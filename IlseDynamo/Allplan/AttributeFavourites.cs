@@ -7,6 +7,8 @@ using IlseDynamo.Internal;
 using IlseDynamo.Data.Allplan;
 
 using Autodesk.DesignScript.Runtime;
+using Dynamo.Graph.Nodes.CustomNodes;
+using System.Text.RegularExpressions;
 
 namespace IlseDynamo.Allplan
 {
@@ -143,6 +145,13 @@ namespace IlseDynamo.Allplan
 
             Favourite.WriteTo(finalFilePath);
             return finalFilePath;
+        }
+
+        public static AttributeFavourites RenameBy(AttributeFavourites favourites, string pattern, string replaceBy)
+        {
+            var regex = new Regex(pattern, RegexOptions.Singleline);
+            favourites.SetName(regex.Replace(favourites.Name, replaceBy));
+            return favourites;
         }
 
         /// <summary>
